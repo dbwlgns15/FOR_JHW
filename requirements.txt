@@ -1,2 +1,2 @@
-pandas-dev
-numpy-dev
+pandas==1.2.5
+streamlit==0.86.0
