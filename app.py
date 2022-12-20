@@ -174,7 +174,7 @@ temp_df3['주문시간'] = temp_df3.astype('str')['주문시간'] +'시'
 
 st.set_page_config(page_title='MFD Dash Board', 
                    page_icon=mfd_logo, 
-                    layout="wide", 
+                   layout="wide", 
                    initial_sidebar_state="auto", 
                    menu_items=None)
 
@@ -183,37 +183,37 @@ st.write(str(df.iloc[0,2]).split()[0]+' 기준')
 _,c1,_, c2,_, c3,_, c4,_ = st.columns([2,10,2,10,2,10,2,10,2])
 with c1:
     st.image(mfd_logo_2)
+with c2:
+    st.image(yogiyo_logo)
+with c3:
+    st.image(baemin_logo)
+with c4:
+    st.image(coupang_logo)
+
+_,c1,_, c2,_, c3,_, c4,_ = st.columns([2,10,2,10,2,10,2,10,2])
+with c1:
     st.metric(label="총 매출", value=총_매출, delta=최근_매출)
     st.metric(label="총 주문건수", value=총_주문건수, delta=최근_주문건수)
 with c2:
-    st.image(yogiyo_logo)
     st.metric(label="요기요 총 매출", value=요기요_총_매출, delta=요기요_최근_매출)
     st.metric(label="요기요 총 주문건수", value=요기요_총_주문건수, delta=요기요_최근_주문건수)   
 with c3:
-    st.image(baemin_logo)
     st.metric(label="배달의민족 총 매출", value=배민_총_매출, delta=배민_최근_매출)
     st.metric(label="배달의민족 총 주문건수", value=배민_총_주문건수, delta=배민_최근_주문건수)   
 with c4:
-    st.image(coupang_logo)
     st.metric(label="쿠팡이츠 총 매출", value=쿠팡_총_매출, delta=쿠팡_최근_매출)
     st.metric(label="쿠팡이츠 총 주문건수", value=쿠팡_총_주문건수, delta=쿠팡_최근_주문건수)   
 
 c1, c2 = st.columns([1,1])
 with c1:
     st.plotly_chart(총_일별_매출, use_container_width=True)
-    
     st.plotly_chart(플랫폼_일별_매출, use_container_width=True)
-    
     st.plotly_chart(요일별_평균_매출, use_container_width=True)
-    
     st.plotly_chart(시간별_총_매출, use_container_width=True)
 with c2:
     st.plotly_chart(총_일별_주문건수, use_container_width=True)
-    
     st.plotly_chart(플랫폼_일별_주문건수, use_container_width=True)
-    
     st.plotly_chart(요일별_평균_주문건수, use_container_width=True)
-    
     st.plotly_chart(시간별_주문건수, use_container_width=True)
 
 c1, c2, c3, c4 = st.columns([1,1,1,1])
@@ -231,7 +231,7 @@ with c1:
     st.plotly_chart(행정동별_주문건수_지도, use_container_width=True)
 with c2:
     st.plotly_chart(행정동별_주문건수, use_container_width=True)
-    st.plotly_chart(행정구별_주문건수)
+    st.plotly_chart(행정구별_주문건수, use_container_width=True)
     
 # st.subheader('원본 주문 데이터')
 # st.dataframe(df)
