@@ -183,24 +183,18 @@ st.write(str(df.iloc[0,2]).split()[0]+' 기준')
 _,c1,_, c2,_, c3,_, c4,_ = st.columns([2,10,2,10,2,10,2,10,2])
 with c1:
     st.image(mfd_logo_2)
-with c2:
-    st.image(yogiyo_logo)
-with c3:
-    st.image(baemin_logo)
-with c4:
-    st.image(coupang_logo)
-
-_,c1,_, c2,_, c3,_, c4,_ = st.columns([2,10,2,10,2,10,2,10,2])
-with c1:
     st.metric(label="총 매출", value=총_매출, delta=최근_매출)
     st.metric(label="총 주문건수", value=총_주문건수, delta=최근_주문건수)
 with c2:
+    st.image(yogiyo_logo)
     st.metric(label="요기요 총 매출", value=요기요_총_매출, delta=요기요_최근_매출)
     st.metric(label="요기요 총 주문건수", value=요기요_총_주문건수, delta=요기요_최근_주문건수)   
 with c3:
+    st.image(baemin_logo)
     st.metric(label="배달의민족 총 매출", value=배민_총_매출, delta=배민_최근_매출)
     st.metric(label="배달의민족 총 주문건수", value=배민_총_주문건수, delta=배민_최근_주문건수)   
 with c4:
+    st.image(coupang_logo)
     st.metric(label="쿠팡이츠 총 매출", value=쿠팡_총_매출, delta=쿠팡_최근_매출)
     st.metric(label="쿠팡이츠 총 주문건수", value=쿠팡_총_주문건수, delta=쿠팡_최근_주문건수)   
 
