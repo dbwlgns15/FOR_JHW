@@ -1,3 +1,0 @@
-pandas-dev
-numpy-dev
-plotly-dev

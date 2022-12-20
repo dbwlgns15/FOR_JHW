@@ -239,16 +239,16 @@ with c2:
     st.plotly_chart(행정동별_주문건수, use_container_width=True)
     st.plotly_chart(행정구별_주문건수)
     
-st.subheader('원본 주문 데이터')
-st.dataframe(df)
+# st.subheader('원본 주문 데이터')
+# st.dataframe(df)
 
-@st.cache
-def convert_df(df):
-    return df.to_csv().encode('utf-8') # IMPORTANT: Cache the conversion to prevent computation on every rerun
-csv = convert_df(df)
+# @st.cache
+# def convert_df(df):
+#     return df.to_csv().encode('utf-8') # IMPORTANT: Cache the conversion to prevent computation on every rerun
+# csv = convert_df(df)
 
-st.download_button(
-    label="csv파일 다운로드",
-    data=csv,
-    file_name=f'MFD_order_data_{str(df.iloc[0,2]).split()[0]}.csv',
-    mime='text/csv')
+# st.download_button(
+#     label="csv파일 다운로드",
+#     data=csv,
+#     file_name=f'MFD_order_data_{str(df.iloc[0,2]).split()[0]}.csv',
+#     mime='text/csv')
