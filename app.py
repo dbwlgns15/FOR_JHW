@@ -103,7 +103,7 @@ temp_df3['주문시간'] = temp_df3.astype('str')['주문시간'] +'시'
                  labels={'x':'주문요일','주문금액':'주문금액(원)'},
                  color='주문금액',
                  text_auto=True,
-                 color_continuous_scale=px.colors.sequential.Viridis)
+                 color_continuous_scale=px.colors.sequential.Bluyl)
 요일별_평균_매출.update_layout(yaxis_tickformat = ',d',
                       showlegend=False)
 
@@ -112,7 +112,7 @@ temp_df3['주문시간'] = temp_df3.astype('str')['주문시간'] +'시'
                   labels={'x':'주문요일','주문금액':'주문건수(건)'},
                  color='주문금액',
                  text_auto=True,
-                 color_continuous_scale=px.colors.sequential.Viridis)
+                 color_continuous_scale=px.colors.sequential.Bluyl)
 요일별_평균_주문건수.update_layout(yaxis_tickformat = 'd',
                       showlegend=False)
 
@@ -120,14 +120,14 @@ temp_df3['주문시간'] = temp_df3.astype('str')['주문시간'] +'시'
                     x = '주문시간', y = '주문금액', title = '시간별 총 매출',
                     color='주문금액',
                     text_auto=True,
-                    color_continuous_scale=px.colors.sequential.Viridis)
+                    color_continuous_scale=px.colors.sequential.Bluyl)
 시간별_총_매출.update_layout(yaxis_tickformat = ',d')
 
 시간별_주문건수 = px.bar(temp_df2,
                     x = '주문시간', y = '주문건수(건)', title = '시간별 주문건수',
                     color='주문건수(건)',
                     text_auto=True,
-                    color_continuous_scale=px.colors.sequential.Viridis)
+                    color_continuous_scale=px.colors.sequential.Bluyl)
 
 고기추가 = px.pie(temp_df,
               values='주문건수', names='고기추가량', title='고기추가량',
@@ -158,13 +158,13 @@ temp_df3['주문시간'] = temp_df3.astype('str')['주문시간'] +'시'
                     x = '지역(동)', y = '주문건수', title = '행정동별 주문건수',
                     color='주문건수',
                     text_auto=True,
-                    color_continuous_scale=px.colors.sequential.Viridis)
+                    color_continuous_scale=px.colors.sequential.Bluyl)
 
 행정동별_주문건수_지도 = px.choropleth_mapbox(df['지역(동)'].value_counts().reset_index().rename(columns = {'index':'지역(동)','지역(동)':'주문건수'}),
                          geojson = my_geojson,
                          locations = '지역(동)', color = '주문건수', title = '행정동별 주문건수 지도(동작,관악)',
                          featureidkey = "properties.adm_nm",
-                         color_continuous_scale=px.colors.sequential.Viridis,
+                         color_continuous_scale=px.colors.sequential.Bluyl,
                          center = {"lat": 37.4782, "lon": 126.942}, zoom=12, opacity=0.5,
                          width = 800, height = 800,
                          mapbox_style="carto-positron") # open-street-map 
