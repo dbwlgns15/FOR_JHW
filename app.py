@@ -181,10 +181,6 @@ st.set_page_config(page_title='MFD Dash Board',
 
 st.write(str(df.iloc[0,2]).split()[0]+' 기준 (현장결제건 제외)')
 
-# print(df['주문날짜'].unique()[0])
-# input_date = st.date_input(label='Start: ',
-#                            min_value=df['주문날짜'].unique()[0], max_value=df['주문날짜'].unique()[-1])
-
 _,c1,_, c2,_, c3,_, c4,_ = st.columns([2,10,2,10,2,10,2,10,2])
 with c1:
     st.image(mfd_logo_2)
@@ -238,6 +234,26 @@ with c2:
     st.plotly_chart(행정동별_주문건수, use_container_width=True)
     st.plotly_chart(행정구별_주문건수, use_container_width=True)
     
+c1, c2 = st.columns([1,2])
+with c1:
+    yogiyo_date_list = df[df['플랫폼']=='요기요'].dropna()['주문날짜'].unique()
+    input_date = st.date_input(label='주문량이 궁금한 날짜를 입력해주세요. (요기요 영수증 기록이 입력된 날짜만 가능)', 
+                               value=pd.to_datetime(yogiyo_date_list[0]),
+                               min_value=pd.to_datetime(yogiyo_date_list[-1]), 
+                               max_value=pd.to_datetime(yogiyo_date_list[0]))
+    if pd.to_datetime(input_date) not in yogiyo_date_list:
+        st.write('영업을 하지 않은 날짜입니다. 다시 입력해주세요.')
+    else:
+        pass
+    
+with c2:
+    날짜별_주문량 = px.bar(df[df['주문날짜']==pd.to_datetime(input_date)].iloc[:,range(8,31)].sum().reset_index().rename(columns = {'index':'메뉴',0:'주문건수'}),
+                        x = '메뉴', y = '주문건수', title = '날짜별 주문량',
+                        color='주문건수',
+                        text_auto=True,
+                        color_continuous_scale=px.colors.sequential.Bluyl)
+    st.plotly_chart(날짜별_주문량, use_container_width=True)
+
 st.subheader('원본 주문 데이터')
 st.dataframe(df)
 
