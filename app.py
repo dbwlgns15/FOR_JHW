@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import json
+import datetime
 from PIL import Image
 
 ########################################################################################################################################################################
@@ -179,6 +180,10 @@ st.set_page_config(page_title='MFD Dash Board',
                    menu_items=None)
 
 st.write(str(df.iloc[0,2]).split()[0]+' 기준 (현장결제건 제외)')
+
+# print(df['주문날짜'].unique()[0])
+# input_date = st.date_input(label='Start: ',
+#                            min_value=df['주문날짜'].unique()[0], max_value=df['주문날짜'].unique()[-1])
 
 _,c1,_, c2,_, c3,_, c4,_ = st.columns([2,10,2,10,2,10,2,10,2])
 with c1:
