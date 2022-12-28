@@ -234,8 +234,11 @@ with c2:
     st.plotly_chart(행정동별_주문건수, use_container_width=True)
     st.plotly_chart(행정구별_주문건수, use_container_width=True)
     
-c1, c2 = st.columns([1,2])
+c1, c2 = st.columns([1,1])
 with c1:
+    pass
+    
+with c2:
     yogiyo_date_list = df[df['플랫폼']=='요기요'].dropna()['주문날짜'].unique()
     input_date = st.date_input(label='주문량이 궁금한 날짜를 입력해주세요. (요기요 영수증 기록이 입력된 날짜만 가능)', 
                                value=pd.to_datetime(yogiyo_date_list[0]),
@@ -246,13 +249,14 @@ with c1:
     else:
         pass
     
-with c2:
     날짜별_주문량 = px.bar(df[df['주문날짜']==pd.to_datetime(input_date)].iloc[:,range(8,31)].sum().reset_index().rename(columns = {'index':'메뉴',0:'주문건수'}),
                         x = '메뉴', y = '주문건수', title = '날짜별 주문량',
                         color='주문건수',
                         text_auto=True,
                         color_continuous_scale=px.colors.sequential.Bluyl)
     st.plotly_chart(날짜별_주문량, use_container_width=True)
+    
+
 
 st.subheader('원본 주문 데이터')
 st.dataframe(df)
