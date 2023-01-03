@@ -28,6 +28,9 @@ def minus_week(x):
     return ['월','화','수','목','금','토','일'][['월','화','수','목','금','토','일'].index(x)-1]
 df.loc[df['주문시간'] == 0, '주문요일'] = df['주문요일'].apply(minus_week) # 주문시간이 밤12시 넘어간 새벽일 경우 요일을 전요일로 변경
 
+########################################################################################################################################################################
+########################################################################################################################################################################
+
 no_add = 0
 temp_df = df[['추가100','추가200','추가300']].dropna().reset_index(drop=True)
 for i in range(len(temp_df)):
@@ -227,6 +230,11 @@ with c3:
 with c4:
     st.plotly_chart(고기추가, use_container_width=True)
 
+# d5 = st.date_input("date range without default", value = [datetime.date(2022, 10, 19), datetime.date(2023, 1, 2)])
+# st.write(d5)
+
+# df = df[df['주문날짜']>=np.datetime64(d5[0])][df['주문날짜']<=np.datetime64(d5[1])]
+
 c1, c2 = st.columns([3,4])
 with c1:
     st.plotly_chart(행정동별_주문건수_지도, use_container_width=True)
@@ -256,8 +264,6 @@ with c2:
                         color_continuous_scale=px.colors.sequential.Bluyl)
     st.plotly_chart(날짜별_주문량, use_container_width=True)
     
-
-
 st.subheader('원본 주문 데이터')
 st.dataframe(df)
 
