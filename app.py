@@ -46,9 +46,13 @@ temp_df2['주문시간'] = temp_df2.astype('str')['주문시간'] +'시'
 temp_df3 = df[['주문시간','주문금액']].groupby('주문시간').sum().loc[[16,17,18,19,20,21,22,23,0]].reset_index()
 temp_df3['주문시간'] = temp_df3.astype('str')['주문시간'] +'시'
 
+yogiyo_date_list = df[df['플랫폼']=='요기요'].dropna()['주문날짜'].unique()
+yogiyo_min_date=pd.to_datetime(yogiyo_date_list[-1])
+yogiyo_max_date=pd.to_datetime(yogiyo_date_list[0])
+temp_df4 = df[df['주문날짜']>=yogiyo_min_date][df['주문날짜']<=yogiyo_max_date].groupby('주문날짜').sum().iloc[:,range(2,26)].mean().round(1).reset_index().rename(columns = {'index':'메뉴',0:'주문건수'})
+
 ########################################################################################################################################################################
 ########################################################################################################################################################################
-지난달_매출 = 0
 
 총_매출 = format(df['주문금액'].sum(),',d') + '원'
 최근_매출 = format(df[['주문날짜','주문금액']].groupby('주문날짜').sum()['주문금액'].to_list()[-1],',d') + '원'
@@ -153,25 +157,11 @@ temp_df3['주문시간'] = temp_df3.astype('str')['주문시간'] +'시'
               hole=0.3,
               color_discrete_sequence=px.colors.qualitative.Vivid)
 
-행정구별_주문건수 = px.pie(df['지역(구)'].value_counts().reset_index().rename(columns = {'index':'지역(구)','지역(구)':'주문건수'}),
-                    values='주문건수', names='지역(구)', title='행정구별 주문건수',
-                    hole=0.3,
-                    color_discrete_sequence=px.colors.qualitative.Vivid)
-
-행정동별_주문건수 = px.bar(df['지역(동)'].value_counts().reset_index().rename(columns = {'index':'지역(동)','지역(동)':'주문건수'}),
-                    x = '지역(동)', y = '주문건수', title = '행정동별 주문건수',
+일평균_메뉴별_주문량 = px.bar(temp_df4,
+                    x = '메뉴', y = '주문건수', title = '일평균 메뉴별 주문량(요기요 주문기록이 입력된 날짜기준)',
                     color='주문건수',
                     text_auto=True,
                     color_continuous_scale=px.colors.sequential.Bluyl)
-
-행정동별_주문건수_지도 = px.choropleth_mapbox(df['지역(동)'].value_counts().reset_index().rename(columns = {'index':'지역(동)','지역(동)':'주문건수'}),
-                         geojson = my_geojson,
-                         locations = '지역(동)', color = '주문건수', title = '행정동별 주문건수 지도(동작,관악)',
-                         featureidkey = "properties.adm_nm",
-                         color_continuous_scale=px.colors.sequential.Bluyl,
-                         center = {"lat": 37.4782, "lon": 126.942}, zoom=12, opacity=0.5,
-                         width = 800, height = 800,
-                         mapbox_style="carto-positron") # open-street-map 
 
 ########################################################################################################################################################################
 ########################################################################################################################################################################
@@ -229,11 +219,34 @@ with c3:
     st.plotly_chart(소스, use_container_width=True)
 with c4:
     st.plotly_chart(고기추가, use_container_width=True)
+    
+st.plotly_chart(일평균_메뉴별_주문량, use_container_width=True)
 
-# d5 = st.date_input("date range without default", value = [datetime.date(2022, 10, 19), datetime.date(2023, 1, 2)])
-# st.write(d5)
+days = st.date_input("기간을 입력해주세요.", 
+                   value = [datetime.date(2022, 10, 19), datetime.datetime.today()],
+                   min_value=datetime.date(2022, 10, 19), 
+                   max_value=datetime.datetime.today())
+df_days = df[df['주문날짜']>=np.datetime64(days[0])][df['주문날짜']<=np.datetime64(days[1])]
 
-# df = df[df['주문날짜']>=np.datetime64(d5[0])][df['주문날짜']<=np.datetime64(d5[1])]
+행정구별_주문건수 = px.pie(df_days['지역(구)'].value_counts().reset_index().rename(columns = {'index':'지역(구)','지역(구)':'주문건수'}),
+                    values='주문건수', names='지역(구)', title='행정구별 주문건수',
+                    hole=0.3,
+                    color_discrete_sequence=px.colors.qualitative.Vivid)
+
+행정동별_주문건수 = px.bar(df_days['지역(동)'].value_counts().reset_index().rename(columns = {'index':'지역(동)','지역(동)':'주문건수'}),
+                    x = '지역(동)', y = '주문건수', title = '행정동별 주문건수',
+                    color='주문건수',
+                    text_auto=True,
+                    color_continuous_scale=px.colors.sequential.Bluyl)
+
+행정동별_주문건수_지도 = px.choropleth_mapbox(df_days['지역(동)'].value_counts().reset_index().rename(columns = {'index':'지역(동)','지역(동)':'주문건수'}),
+                         geojson = my_geojson,
+                         locations = '지역(동)', color = '주문건수', title = '행정동별 주문건수 지도(동작,관악)',
+                         featureidkey = "properties.adm_nm",
+                         color_continuous_scale=px.colors.sequential.Bluyl,
+                         center = {"lat": 37.4782, "lon": 126.942}, zoom=12, opacity=0.5,
+                         width = 800, height = 800,
+                         mapbox_style="carto-positron") # open-street-map
 
 c1, c2 = st.columns([3,4])
 with c1:
@@ -241,28 +254,6 @@ with c1:
 with c2:
     st.plotly_chart(행정동별_주문건수, use_container_width=True)
     st.plotly_chart(행정구별_주문건수, use_container_width=True)
-    
-c1, c2 = st.columns([1,1])
-with c1:
-    pass
-    
-with c2:
-    yogiyo_date_list = df[df['플랫폼']=='요기요'].dropna()['주문날짜'].unique()
-    input_date = st.date_input(label='주문량이 궁금한 날짜를 입력해주세요. (요기요 영수증 기록이 입력된 날짜만 가능)', 
-                               value=pd.to_datetime(yogiyo_date_list[0]),
-                               min_value=pd.to_datetime(yogiyo_date_list[-1]), 
-                               max_value=pd.to_datetime(yogiyo_date_list[0]))
-    if pd.to_datetime(input_date) not in yogiyo_date_list:
-        st.write('영업을 하지 않은 날짜입니다. 다시 입력해주세요.')
-    else:
-        pass
-    
-    날짜별_주문량 = px.bar(df[df['주문날짜']==pd.to_datetime(input_date)].iloc[:,range(8,31)].sum().reset_index().rename(columns = {'index':'메뉴',0:'주문건수'}),
-                        x = '메뉴', y = '주문건수', title = '날짜별 주문량',
-                        color='주문건수',
-                        text_auto=True,
-                        color_continuous_scale=px.colors.sequential.Bluyl)
-    st.plotly_chart(날짜별_주문량, use_container_width=True)
     
 st.subheader('원본 주문 데이터')
 st.dataframe(df)
