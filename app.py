@@ -49,7 +49,7 @@ temp_df3['주문시간'] = temp_df3.astype('str')['주문시간'] +'시'
 yogiyo_date_list = df[df['플랫폼']=='요기요'].dropna()['주문날짜'].unique()
 yogiyo_min_date=pd.to_datetime(yogiyo_date_list[-1])
 yogiyo_max_date=pd.to_datetime(yogiyo_date_list[0])
-temp_df4 = df[df['주문날짜']>=yogiyo_min_date][df['주문날짜']<=yogiyo_max_date].groupby('주문날짜').sum().iloc[:,range(2,26)].mean().round(1).reset_index().rename(columns = {'index':'메뉴',0:'주문건수'})
+temp_df4 = df[df['주문날짜']>=yogiyo_min_date][df['주문날짜']<=yogiyo_max_date].groupby('주문날짜').sum().iloc[:,range(2,27)].mean().round(1).reset_index().rename(columns = {'index':'메뉴',0:'주문건수'})
 
 ########################################################################################################################################################################
 ########################################################################################################################################################################
