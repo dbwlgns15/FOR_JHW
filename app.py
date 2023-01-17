@@ -270,25 +270,27 @@ df_days = df[df['주문날짜']>=np.datetime64(days[0])][df['주문날짜']<=np.
 쿠팡이츠_쿠폰_광고_지출 = format(df_days[df_days['플랫폼'] == '쿠팡이츠']['매장부담금액'].sum(),',d') + '원'
 
 평균_주문금액 = format(int(df_days['주문금액'].mean().round(0)),',d') + '원'
-# test
+
 #########################################################################################################################################################################
 #######################################################################################################################################################################
 
-c1, c2, c3, c4, c5,_,_ = st.columns([1,1,1,1,1,1,1])
+c1, c2, c3, c4, c5, c6, c7 = st.columns([1,1,1,1,1,1,1])
 with c1:
-    st.metric(label="배달의민족 3만원 이상 주문건수", value=배민_삼만원_건수)
-with c2:
-    st.metric(label="배민 오픈리스트/울트라콜 주문건수", value=배민_오픈울트라_주문건수)
-    st.metric(label="배민 오픈리스트/울트라콜 매출", value=배민_오픈울트라_매출)
-    st.metric(label="배민 기타 주문건수", value=배민_기타_주문건수)
-    st.metric(label="배민 기타 매출", value=배민_기타_매출)
-    st.metric(label="배민 배민1 주문건수", value=배민_원_주문건수)
-    st.metric(label="배민 배민1 매출", value=배민_원_매출)
-with c3:
     st.metric(label="배달의민족 쿠폰 지출 금액", value=배민_쿠폰_지출)
     st.metric(label="요기요 쿠폰 지출 금액", value=요기요_쿠폰_지출)
     st.metric(label="쿠팡이츠 쿠폰 및 광고 지출 금액", value=쿠팡이츠_쿠폰_광고_지출)
+with c2:
+    st.metric(label="배달의민족 3만원 이상 주문건수", value=배민_삼만원_건수)
+with c3:
+    st.metric(label="배민 오픈리스트/울트라콜 주문건수", value=배민_오픈울트라_주문건수)
+    st.metric(label="배민 오픈리스트/울트라콜 매출", value=배민_오픈울트라_매출)
 with c4:
+    st.metric(label="배민 기타 주문건수", value=배민_기타_주문건수)
+    st.metric(label="배민 기타 매출", value=배민_기타_매출)
+with c5:
+    st.metric(label="배민 배민1 주문건수", value=배민_원_주문건수)
+    st.metric(label="배민 배민1 매출", value=배민_원_매출)
+with c6:
     st.metric(label="평균 주문금액", value=평균_주문금액)  
 
 st.subheader('원본 주문 데이터')
