@@ -257,9 +257,18 @@ df_days = df[df['주문날짜']>=np.datetime64(days[0])][df['주문날짜']<=np.
 
 배민_삼만원_건수 = df_days[df_days['플랫폼'] == '배달의민족']
 배민_삼만원_건수 = str(len(배민_삼만원_건수[배민_삼만원_건수['주문금액'] >= 30000]))+'건'
+
+배민_오픈울트라_주문건수 = str(len(df_days[df_days['기타'] == '오픈리스트']) + len(df_days[df_days['기타'] == '울트라콜'])) + '건'
+배민_오픈울트라_매출 = format(df_days[df_days['기타'] == '오픈리스트']['주문금액'].sum() + df_days[df_days['기타'] == '울트라콜']['주문금액'].sum(),',d') + '원'
+배민_기타_주문건수 = str(len(df_days[df_days['기타'] == '기타'])) + '건'
+배민_기타_매출 =  format(df_days[df_days['기타'] == '기타']['주문금액'].sum(),',d') + '원'
+배민_원_주문건수 = str(len(df_days[df_days['기타'] == '배민1'])) + '건'
+배민_원_매출 = format(df_days[df_days['기타'] == '배민1']['주문금액'].sum(),',d') + '원'
+
 배민_쿠폰_지출 = format(df_days[df_days['플랫폼'] == '배달의민족']['매장부담금액'].sum(),',d') + '원'
 요기요_쿠폰_지출 = format(df_days[df_days['플랫폼'] == '요기요']['매장부담금액'].sum(),',d') + '원'
 쿠팡이츠_쿠폰_광고_지출 = format(df_days[df_days['플랫폼'] == '쿠팡이츠']['매장부담금액'].sum(),',d') + '원'
+
 평균_주문금액 = format(int(df_days['주문금액'].mean().round(0)),',d') + '원'
 
 #########################################################################################################################################################################
@@ -269,13 +278,18 @@ c1, c2, c3, c4, c5,_,_ = st.columns([1,1,1,1,1,1,1])
 with c1:
     st.metric(label="배달의민족 3만원 이상 주문건수", value=배민_삼만원_건수)
 with c2:
-    st.metric(label="배달의민족 쿠폰 지출 금액", value=배민_쿠폰_지출)
+    st.metric(label="배민 오픈리스트/울트라콜 주문건수", value=배민_오픈울트라_주문건수)
+    st.metric(label="배민 오픈리스트/울트라콜 매출", value=배민_오픈울트라_매출)
+    st.metric(label="배민 기타 주문건수", value=배민_기타_주문건수)
+    st.metric(label="배민 기타 매출", value=배민_기타_매출)
+    st.metric(label="배민 배민1 주문건수", value=배민_원_주문건수)
+    st.metric(label="배민 배민1 매출", value=배민_원_매출)
 with c3:
+    st.metric(label="배달의민족 쿠폰 지출 금액", value=배민_쿠폰_지출)
     st.metric(label="요기요 쿠폰 지출 금액", value=요기요_쿠폰_지출)
-with c4:
     st.metric(label="쿠팡이츠 쿠폰 및 광고 지출 금액", value=쿠팡이츠_쿠폰_광고_지출)
-with c5:
-    st.metric(label="평균 주문금액", value=평균_주문금액)    
+with c4:
+    st.metric(label="평균 주문금액", value=평균_주문금액)  
 
 st.subheader('원본 주문 데이터')
 st.dataframe(df_days)
