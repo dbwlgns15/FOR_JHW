@@ -281,14 +281,15 @@ df_days = df[df['주문날짜']>=np.datetime64(days[0])][df['주문날짜']<=np.
 
 c1, c2, c3, c4, c5, c6, c7 = st.columns([1,1,1,1,1,1,1])
 with c1:
+    st.metric(label="총 매출", value=기간_총_매출)
+    st.metric(label="평균 매출", value=기간_평균_매출)
+    st.metric(label="객단가", value=기간_객단가)  
+    st.metric(label="영업일", value=기간_영업일)  
+with c2:
     st.metric(label="배달의민족 쿠폰 지출 금액", value=배민_쿠폰_지출)
     st.metric(label="요기요 쿠폰 지출 금액", value=요기요_쿠폰_지출)
     st.metric(label="쿠팡이츠 쿠폰 및 광고 지출 금액", value=쿠팡이츠_쿠폰_광고_지출)
-with c2:
-    st.metric(label="총 매출", value=기간_총_매출)
-    st.metric(label="평균 매출", value=기간_평균_매출)
-    st.metric(label="영업일", value=기간_영업일)  
-    st.metric(label="객단가", value=기간_객단가)  
+
 with c3:
     st.metric(label="배달의민족 3만원 이상 주문건수", value=배민_삼만원_건수)
     st.metric(label="배달의민족 포장 주문건수", value=배민_포장_건수)
