@@ -257,6 +257,7 @@ df_days = df[df['주문날짜']>=np.datetime64(days[0])][df['주문날짜']<=np.
 
 배민_삼만원_건수 = df_days[df_days['플랫폼'] == '배달의민족']
 배민_삼만원_건수 = str(len(배민_삼만원_건수[배민_삼만원_건수['주문금액'] >= 30000]))+'건'
+배민_포장_건수 = str(len(df_days[df_days['플랫폼'] == '배달의민족'][df_days['기타'] == '배민포장주문'])) + '건'
 
 배민_오픈울트라_주문건수 = str(len(df_days[df_days['기타'] == '오픈리스트']) + len(df_days[df_days['기타'] == '울트라콜'])) + '건'
 배민_오픈울트라_매출 = format(df_days[df_days['기타'] == '오픈리스트']['주문금액'].sum() + df_days[df_days['기타'] == '울트라콜']['주문금액'].sum(),',d') + '원'
@@ -281,6 +282,7 @@ with c1:
     st.metric(label="쿠팡이츠 쿠폰 및 광고 지출 금액", value=쿠팡이츠_쿠폰_광고_지출)
 with c2:
     st.metric(label="배달의민족 3만원 이상 주문건수", value=배민_삼만원_건수)
+    st.metric(label="배달의민족 포장 주문건수", value=배민_포장_건수)
 with c3:
     st.metric(label="배민 오픈리스트/울트라콜 주문건수", value=배민_오픈울트라_주문건수)
     st.metric(label="배민 오픈리스트/울트라콜 매출", value=배민_오픈울트라_매출)
