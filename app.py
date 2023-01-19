@@ -285,22 +285,22 @@ with c1:
     st.metric(label="요기요 쿠폰 지출 금액", value=요기요_쿠폰_지출)
     st.metric(label="쿠팡이츠 쿠폰 및 광고 지출 금액", value=쿠팡이츠_쿠폰_광고_지출)
 with c2:
-    st.metric(label="배달의민족 3만원 이상 주문건수", value=배민_삼만원_건수)
-    st.metric(label="배달의민족 포장 주문건수", value=배민_포장_건수)
-with c3:
-    st.metric(label="배민 오픈리스트/울트라콜 주문건수", value=배민_오픈울트라_주문건수)
-    st.metric(label="배민 오픈리스트/울트라콜 매출", value=배민_오픈울트라_매출)
-with c4:
-    st.metric(label="배민 기타 주문건수", value=배민_기타_주문건수)
-    st.metric(label="배민 기타 매출", value=배민_기타_매출)
-with c5:
-    st.metric(label="배민 배민1 주문건수", value=배민_원_주문건수)
-    st.metric(label="배민 배민1 매출", value=배민_원_매출)
-with c6:
     st.metric(label="총 매출", value=기간_총_매출)
     st.metric(label="평균 매출", value=기간_평균_매출)
     st.metric(label="영업일", value=기간_영업일)  
     st.metric(label="객단가", value=기간_객단가)  
+with c3:
+    st.metric(label="배달의민족 3만원 이상 주문건수", value=배민_삼만원_건수)
+    st.metric(label="배달의민족 포장 주문건수", value=배민_포장_건수)
+with c4:
+    st.metric(label="배민 오픈리스트/울트라콜 주문건수", value=배민_오픈울트라_주문건수)
+    st.metric(label="배민 오픈리스트/울트라콜 매출", value=배민_오픈울트라_매출)
+with c5:
+    st.metric(label="배민 기타 주문건수", value=배민_기타_주문건수)
+    st.metric(label="배민 기타 매출", value=배민_기타_매출)
+with c6:
+    st.metric(label="배민 배민1 주문건수", value=배민_원_주문건수)
+    st.metric(label="배민 배민1 매출", value=배민_원_매출)
 
 st.subheader('원본 주문 데이터')
 st.dataframe(df_days)
