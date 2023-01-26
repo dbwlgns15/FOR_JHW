@@ -273,7 +273,8 @@ df_days = df[df['주문날짜']>=np.datetime64(days[0])][df['주문날짜']<=np.
 
 기간_총_매출 = format(df_days['주문금액'].sum(),',d') + '원'
 기간_평균_매출 = format(int(df_days['주문금액'].sum() / df_days['주문날짜'].nunique()),',d') + '원'
-기간_영업일 = str(df_days['주문날짜'].nunique()) + '일'
+기간_영업일 = str(df_days['주문날짜'].nunique()) + '일'건
+기간_평균_주문건수 = str((df_days['주문금액'].sum()/df_days['주문날짜'].nunique()).round(1)) + '건'
 기간_객단가 = format(int(df_days['주문금액'].mean().round(0)),',d') + '원'
 
 #########################################################################################################################################################################
@@ -284,6 +285,7 @@ with c1:
     st.metric(label="총 매출", value=기간_총_매출)
     st.metric(label="평균 매출", value=기간_평균_매출)
     st.metric(label="객단가", value=기간_객단가)  
+    st.metric(label="평균 주문건수", value=기간_평균_주문건수)  
     st.metric(label="영업일", value=기간_영업일)  
 with c2:
     st.metric(label="배달의민족 쿠폰 지출 금액", value=배민_쿠폰_지출)
