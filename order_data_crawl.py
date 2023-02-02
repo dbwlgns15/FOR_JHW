@@ -7,6 +7,12 @@ from selenium import webdriver
 
 data = []
 
+id_pw = open('id_pw.txt')
+bm_id = str(id_pw.readline()).strip()
+bm_pw = str(id_pw.readline()).strip()
+cp_id = str(id_pw.readline()).strip()
+cp_pw = str(id_pw.readline()).strip()
+
 ################# 배단의민족 ################################################
 ############################################################################
 
@@ -19,8 +25,8 @@ baemin_url = 'https://ceo.baemin.com/self-service/orders/history'
 
 driver.get(baemin_url)  # 배달의민족 사장님 사이트 접속
 time.sleep(1)
-driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/div[1]/span/input').send_keys('meatbot')  # ID입력
-driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/div[2]/span/input').send_keys('peoplesleague1217')  # PW입력
+driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/div[1]/span/input').send_keys(bm_id)  # ID입력
+driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/div[2]/span/input').send_keys(bm_pw)  # PW입력
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/button').click()  # 로그인 버튼 클릭
 time.sleep(2)
 
@@ -123,8 +129,8 @@ driver = webdriver.Chrome("./TEMP/chromedriver",options=options)
 driver.get(coupang_url) # 쿠팡이츠 사장님 사이트 접속
 time.sleep(5)
 
-driver.find_element("xpath", '//*[@id="loginId"]').send_keys('meatbot') # ID입력
-driver.find_element("xpath", '//*[@id="password"]').send_keys('peoplesleague1!') # PW입력
+driver.find_element("xpath", '//*[@id="loginId"]').send_keys(cp_id) # ID입력
+driver.find_element("xpath", '//*[@id="password"]').send_keys(cp_pw) # PW입력
 driver.find_element("xpath", '//*[@id="merchant-login"]/div/div[2]/div/div/div/form/button').click() # 로그인 버튼 클릭
 time.sleep(5)
 
