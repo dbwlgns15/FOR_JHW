@@ -308,7 +308,7 @@ with c6:
 st.subheader('원본 주문 데이터')
 st.dataframe(df_days)
 
-@st.cache
+@st.cache_data
 def convert_df(df_days):
     return df_days.to_csv().encode('utf-8') # IMPORTANT: Cache the conversion to prevent computation on every rerun
 csv = convert_df(df_days)
