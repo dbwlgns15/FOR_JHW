@@ -308,13 +308,13 @@ with c6:
 st.subheader('원본 주문 데이터')
 st.dataframe(df_days)
 
-@st.cache_data
-def convert_df(df_days):
-    return df_days.to_csv().encode('utf-8') # IMPORTANT: Cache the conversion to prevent computation on every rerun
-csv = convert_df(df_days)
+# @st.cache_data
+# def convert_df(df_days):
+#     return df_days.to_csv().encode('utf-8') # IMPORTANT: Cache the conversion to prevent computation on every rerun
+# csv = convert_df(df_days)
 
-st.download_button(
-    label="csv파일 다운로드",
-    data=csv,
-    file_name=f'MFD_order_data_{str(df.iloc[0,2]).split()[0]}.csv',
-    mime='text/csv')
+# st.download_button(
+#     label="csv파일 다운로드",
+#     data=csv,
+#     file_name=f'MFD_order_data_{str(df.iloc[0,2]).split()[0]}.csv',
+#     mime='text/csv')
