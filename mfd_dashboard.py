@@ -33,10 +33,10 @@ for i in range(len(temp_df)):
 temp_df = temp_df.sum().reset_index().rename(columns = {'index':'고기추가량',0:'주문건수'})
 temp_df.loc[3] = ['추가없음',no_add]
 
-temp_df2 = df['주문시간'].value_counts().loc[[15,16,17,18,19,20,21,22,23,24]].reset_index().rename(columns = {'index':'주문시간','주문시간':'주문건수(건)'})
+temp_df2 = df['주문시간'].value_counts().loc[[11,12,13,14,15,16,17,18,19,20,21,22,23]].reset_index().rename(columns = {'index':'주문시간','주문시간':'주문건수(건)'})
 temp_df2['주문시간'] = temp_df2.astype('str')['주문시간'] +'시'
 
-temp_df3 = df[['주문시간','주문금액']].groupby('주문시간').sum().loc[[15,16,17,18,19,20,21,22,23,24]].reset_index()
+temp_df3 = df[['주문시간','주문금액']].groupby('주문시간').sum().loc[[11,12,13,14,15,16,17,18,19,20,21,22,23]].reset_index()
 temp_df3['주문시간'] = temp_df3.astype('str')['주문시간'] +'시'
 
 yogiyo_date_list = df[df['플랫폼']=='요기요'].dropna(subset=['지방'])['주문날짜'].unique()

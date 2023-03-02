@@ -66,6 +66,8 @@ while True:
                 
                 if raw_date[-2] == '오후': # 오후면 시간을 24시 기준으로 맞추기 위해 12 더하기
                     order_time += 12
+                    if order_time == 24:
+                        order_time -= 12
                 elif order_time == 12: # 오전 12시는 24시로 변경
                     order_time = 24
                 order_week = raw_date[3][1:-1]
@@ -127,12 +129,21 @@ coupang_url = 'https://store.coupangeats.com/merchant/management/'
 driver = webdriver.Chrome("./TEMP/chromedriver",options=options)
 
 driver.get(coupang_url) # 쿠팡이츠 사장님 사이트 접속
-time.sleep(5)
+time.sleep(3)
 
 driver.find_element("xpath", '//*[@id="loginId"]').send_keys(cp_id) # ID입력
 driver.find_element("xpath", '//*[@id="password"]').send_keys(cp_pw) # PW입력
 driver.find_element("xpath", '//*[@id="merchant-login"]/div/div[2]/div/div/div/form/button').click() # 로그인 버튼 클릭
-time.sleep(5)
+time.sleep(3)
+
+driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[3]/div[2]/button[1]').click()
+time.sleep(1)
+
+driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[3]/button[2]').click()
+time.sleep(1)
+
+driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[2]/button').click()
+time.sleep(1)
 
 driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[2]/div/div/div/button').click() # 광고 종료 클릭
 time.sleep(0.2)
