@@ -54,8 +54,8 @@ while True:
         html = driver.page_source
         bs = BeautifulSoup(html, 'html.parser')
         table = bs.findAll('table', {'class': 'Table DesktopVersion-module__ptIC'})[0].findAll('tbody')[0].findAll('tr')
-
         for i in range(20):
+            
             if i % 2 == 0: # 주문번호, 주문날짜, 주문시간, 주문요일, 주문금액
                 order_num = str(table[i].findAll('td')[0].text)[4:]
                 order_gita = str(table[i].findAll('td')[2].text)
@@ -63,7 +63,6 @@ while True:
                 order_date = f'{raw_date[0][:-1]}-{raw_date[1][:-1]}-{raw_date[2][:-1]}'
                 order_time = int(raw_date[-1].split(':')[0])
                 order_marketing = 0
-                
                 if raw_date[-2] == '오후': # 오후면 시간을 24시 기준으로 맞추기 위해 12 더하기
                     order_time += 12
                     if order_time == 24:
@@ -85,7 +84,10 @@ while True:
                 for j in detail:
                     detail_line = j.text
                     if '사장님부담 쿠폰할인' in detail_line: # 배민 쿠폰 금액 체크
-                        order_marketing += int(detail_line.split('원')[0].split('사장님부담 쿠폰할인')[-1].replace(',',''))
+                        try:
+                            order_marketing += int(detail_line.split('원')[0].split('사장님부담 쿠폰할인')[-1].replace(',',''))
+                        except:
+                            order_marketing += int(detail_line.split('사장님부담 쿠폰할인')[-1].split('원')[0].replace(',',''))
                         break
 
                     if '┗' not in detail_line: # 메뉴 카운트                      
@@ -102,10 +104,8 @@ while True:
                                 menu_cnt[menu] += cnt
                 
                 data.append([order_num, '배달의민족', order_gita, order_date, order_time, order_week, order_price, order_marketing, '', '']+list(menu_cnt.values()))
-                
         if check == 1 and order_date != check_date: # 최신 날짜까지만 크롤링 
             break
-        
         driver.find_elements("class name", 'Paging-module__z3RX')[-2].click()  # 다음페이지 버튼 클릭
         time.sleep(1)
         
