@@ -50,15 +50,16 @@ while True:
     try:
         driver.find_element("xpath", '//*[@id="root"]/div/div[3]/div[2]/div[1]/div/div[3]/button').click()  # 펼쳐보기 버튼 클릭
         time.sleep(0.5)
-
         html = driver.page_source
         bs = BeautifulSoup(html, 'html.parser')
-        table = bs.findAll('table', {'class': 'Table DesktopVersion-module__ptIC'})[0].findAll('tbody')[0].findAll('tr')
+        table = bs.findAll('table', {'class': 'Table-module__Iclh Table-module__HQVt DesktopVersion-module__ptIC'})[0].findAll('tbody')[0].findAll('tr')
         for i in range(20):
-            
-            if i % 2 == 0: # 주문번호, 주문날짜, 주문시간, 주문요일, 주문금액
+
+            if i % 2 == 0: # 주문번호, 기타, 주문날짜, 주문시간, 주문요일, 주문금액
                 order_num = str(table[i].findAll('td')[0].text)[4:]
                 order_gita = str(table[i].findAll('td')[2].text)
+                if order_gita == '배민1 한집배달':
+                    order_gita = '배민1'
                 raw_date = str(table[i].findAll('td')[1].text).split()
                 order_date = f'{raw_date[0][:-1]}-{raw_date[1][:-1]}-{raw_date[2][:-1]}'
                 order_time = int(raw_date[-1].split(':')[0])
@@ -74,7 +75,7 @@ while True:
                 
                 if order_date == check_date: # 날짜 체크
                     check = 1
-                
+
             if i % 2 == 1: # 상세 메뉴
                 detail = table[i].findAll('div', {'class': 'DetailInfo-module__DjeY'})[0].findAll('div')
                 menu_cnt = {} # 메뉴 카운트 리셋
@@ -104,11 +105,12 @@ while True:
                                 menu_cnt[menu] += cnt
                 
                 data.append([order_num, '배달의민족', order_gita, order_date, order_time, order_week, order_price, order_marketing, '', '']+list(menu_cnt.values()))
+
         if check == 1 and order_date != check_date: # 최신 날짜까지만 크롤링 
             break
         driver.find_elements("class name", 'Paging-module__z3RX')[-2].click()  # 다음페이지 버튼 클릭
         time.sleep(1)
-        
+   
     except:
         break  # 다음페이지 버튼이 눌리지 않으면 종료
 driver.quit()
@@ -134,7 +136,7 @@ time.sleep(3)
 driver.find_element("xpath", '//*[@id="loginId"]').send_keys(cp_id) # ID입력
 driver.find_element("xpath", '//*[@id="password"]').send_keys(cp_pw) # PW입력
 driver.find_element("xpath", '//*[@id="merchant-login"]/div/div[2]/div/div/div/form/button').click() # 로그인 버튼 클릭
-time.sleep(3)
+time.sleep(5)
 
 driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[3]/div[2]/button[1]').click()
 time.sleep(1)
