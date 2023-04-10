@@ -255,6 +255,24 @@ days = st.date_input("기간을 입력해주세요.",
                     max_value=datetime.datetime.today())
 df_days = df[df['주문날짜']>=np.datetime64(days[0])][df['주문날짜']<=np.datetime64(days[1])] 
 
+temp_df5 = df_days['주문시간'].value_counts().loc[[11,12,13,14,15,16,17,18,19,20,21,22]].reset_index().rename(columns = {'index':'주문시간','주문시간':'주문건수(건)'})
+temp_df5['주문시간'] = temp_df5.astype('str')['주문시간'] +'시'
+temp_df6 = df_days[['주문시간','주문금액']].groupby('주문시간').sum().loc[[11,12,13,14,15,16,17,18,19,20,21,22]].reset_index()
+temp_df6['주문시간'] = temp_df6.astype('str')['주문시간'] +'시'
+
+기간_시간별_총_매출 = px.bar(temp_df6,
+                    x = '주문시간', y = '주문금액', title = '시간별 총 매출',
+                    color='주문금액',
+                    text_auto=True,
+                    color_continuous_scale=px.colors.sequential.Bluyl)
+기간_시간별_총_매출.update_layout(yaxis_tickformat = ',d')
+
+기간_시간별_주문건수 = px.bar(temp_df5,
+                    x = '주문시간', y = '주문건수(건)', title = '시간별 주문건수',
+                    color='주문건수(건)',
+                    text_auto=True,
+                    color_continuous_scale=px.colors.sequential.Bluyl)
+
 배민_삼만원_건수 = df_days[df_days['플랫폼'] == '배달의민족']
 배민_삼만원_건수 = str(len(배민_삼만원_건수[배민_삼만원_건수['주문금액'] >= 30000]))+'건'
 배민_포장_건수 = df_days[df_days['플랫폼'] == '배달의민족']
@@ -304,6 +322,13 @@ with c5:
 with c6:
     st.metric(label="배민 배민1 주문건수", value=배민_원_주문건수)
     st.metric(label="배민 배민1 매출", value=배민_원_매출)
+    
+c1, c2 = st.columns([1,1])
+with c1:
+    st.plotly_chart(기간_시간별_총_매출, use_container_width=True)
+with c2:
+    st.plotly_chart(기간_시간별_주문건수, use_container_width=True)
+
 
 st.subheader('원본 주문 데이터')
 st.dataframe(df_days)
