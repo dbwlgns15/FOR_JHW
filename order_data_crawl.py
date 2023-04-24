@@ -48,19 +48,19 @@ menu_list = ['고소한 삼겹', '고단백 삼겹', '황금비율 삼겹', '세
 check = 0
 while True:
     try:
-        driver.find_element("xpath", '//*[@id="root"]/div/div[3]/div[2]/div[1]/div/div[3]/button').click()  # 펼쳐보기 버튼 클릭
-        time.sleep(0.5)
+        # driver.find_element("xpath", '//*[@id="root"]/div/div[3]/div[2]/div[1]/div/div[3]/button').click()  # 펼쳐보기 버튼 클릭
+        # time.sleep(0.5)
         html = driver.page_source
         bs = BeautifulSoup(html, 'html.parser')
-        table = bs.findAll('table', {'class': 'Table-module__Iclh Table-module__HQVt DesktopVersion-module__ptIC'})[0].findAll('tbody')[0].findAll('tr')
+        table = bs.findAll('table', {'class': 'bsds-table css-18du3ut'})[0].findAll('tbody')[0].findAll('tr')
         for i in range(20):
 
             if i % 2 == 0: # 주문번호, 기타, 주문날짜, 주문시간, 주문요일, 주문금액
-                order_num = str(table[i].findAll('td')[0].text)[4:]
-                order_gita = str(table[i].findAll('td')[2].text)
+                order_num = str(table[i].findAll('td')[1].text)[4:]
+                order_gita = str(table[i].findAll('td')[3].text)
                 if order_gita == '배민1 한집배달':
                     order_gita = '배민1'
-                raw_date = str(table[i].findAll('td')[1].text).split()
+                raw_date = str(table[i].findAll('td')[2].text).split()
                 order_date = f'{raw_date[0][:-1]}-{raw_date[1][:-1]}-{raw_date[2][:-1]}'
                 order_time = int(raw_date[-1].split(':')[0])
                 order_marketing = 0
@@ -71,11 +71,11 @@ while True:
                 elif order_time == 12: # 오전 12시는 24시로 변경
                     order_time = 24
                 order_week = raw_date[3][1:-1]
-                order_price = str(table[i].findAll('td')[7].text).replace(',', '').replace('원', '')
+                order_price = str(table[i].findAll('td')[8].text).replace(',', '').replace('원', '')
                 
                 if order_date == check_date: # 날짜 체크
                     check = 1
-
+                    
             if i % 2 == 1: # 상세 메뉴
                 detail = table[i].findAll('div', {'class': 'DetailInfo-module__DjeY'})[0].findAll('div')
                 menu_cnt = {} # 메뉴 카운트 리셋
@@ -108,7 +108,9 @@ while True:
 
         if check == 1 and order_date != check_date: # 최신 날짜까지만 크롤링 
             break
-        driver.find_elements("class name", 'Paging-module__z3RX')[-2].click()  # 다음페이지 버튼 클릭
+        
+        driver.find_element("xpath", '//*[@id="root"]/div/div[3]/div[2]/div[1]/div/nav/ul/li[13]/div[1]/button').click() # 다음페이지 버튼 클릭
+
         time.sleep(1)
    
     except:

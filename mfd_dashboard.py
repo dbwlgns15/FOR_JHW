@@ -33,10 +33,10 @@ for i in range(len(temp_df)):
 temp_df = temp_df.sum().reset_index().rename(columns = {'index':'고기추가량',0:'주문건수'})
 temp_df.loc[3] = ['추가없음',no_add]
 
-temp_df2 = df['주문시간'].value_counts().loc[[11,12,13,14,15,16,17,18,19,20,21,22,23]].reset_index().rename(columns = {'index':'주문시간','주문시간':'주문건수(건)'})
+temp_df2 = df['주문시간'].value_counts().loc[[11,12,13,14,15,16,17,18,19,20,21,22]].reset_index().rename(columns = {'index':'주문시간','주문시간':'주문건수(건)'})
 temp_df2['주문시간'] = temp_df2.astype('str')['주문시간'] +'시'
 
-temp_df3 = df[['주문시간','주문금액']].groupby('주문시간').sum().loc[[11,12,13,14,15,16,17,18,19,20,21,22,23]].reset_index()
+temp_df3 = df[['주문시간','주문금액']].groupby('주문시간').sum().loc[[11,12,13,14,15,16,17,18,19,20,21,22]].reset_index()
 temp_df3['주문시간'] = temp_df3.astype('str')['주문시간'] +'시'
 
 yogiyo_date_list = df[df['플랫폼']=='요기요'].dropna(subset=['지방'])['주문날짜'].unique()
@@ -273,8 +273,6 @@ temp_df6['주문시간'] = temp_df6.astype('str')['주문시간'] +'시'
                     text_auto=True,
                     color_continuous_scale=px.colors.sequential.Bluyl)
 
-배민_삼만원_건수 = df_days[df_days['플랫폼'] == '배달의민족']
-배민_삼만원_건수 = str(len(배민_삼만원_건수[배민_삼만원_건수['주문금액'] >= 30000]))+'건'
 배민_포장_건수 = df_days[df_days['플랫폼'] == '배달의민족']
 배민_포장_건수 = str(len(배민_포장_건수[배민_포장_건수['기타'] == '배민포장주문'])) + '건'
 
@@ -284,6 +282,10 @@ temp_df6['주문시간'] = temp_df6.astype('str')['주문시간'] +'시'
 배민_기타_매출 =  format(df_days[df_days['기타'] == '기타']['주문금액'].sum(),',d') + '원'
 배민_원_주문건수 = str(len(df_days[df_days['기타'] == '배민1'])) + '건'
 배민_원_매출 = format(df_days[df_days['기타'] == '배민1']['주문금액'].sum(),',d') + '원'
+배민_원_삼만오천원_건수 = df_days[df_days['플랫폼'] == '배달의민족'][df_days['기타'] == '배민1']
+배민_원_삼만오천원_건수 = str(len(배민_원_삼만오천원_건수[배민_원_삼만오천원_건수['주문금액'] >= 35000]))+'건'
+배민_원_삼만원_건수 = df_days[df_days['플랫폼'] == '배달의민족'][df_days['기타'] == '배민1']
+배민_원_삼만원_건수 = str(len(배민_원_삼만원_건수[배민_원_삼만원_건수['주문금액'] >= 30000]))+'건'
 
 배민_쿠폰_지출 = format(df_days[df_days['플랫폼'] == '배달의민족']['매장부담금액'].sum(),',d') + '원'
 요기요_쿠폰_지출 = format(df_days[df_days['플랫폼'] == '요기요']['매장부담금액'].sum(),',d') + '원'
@@ -311,8 +313,11 @@ with c2:
     st.metric(label="쿠팡이츠 쿠폰 및 광고 지출 금액", value=쿠팡이츠_쿠폰_광고_지출)
 
 with c3:
-    st.metric(label="배달의민족 3만원 이상 주문건수", value=배민_삼만원_건수)
-    st.metric(label="배달의민족 포장 주문건수", value=배민_포장_건수)
+    st.metric(label="배민 배민1 주문건수", value=배민_원_주문건수)
+    st.metric(label="배민 배민1 매출", value=배민_원_매출)
+    st.metric(label="배민 배민1 30000원 이상 주문건수", value=배민_원_삼만원_건수)
+    st.metric(label="배민 배민1 35000원 이상 주문건수", value=배민_원_삼만오천원_건수)
+    
 with c4:
     st.metric(label="배민 오픈리스트/울트라콜 주문건수", value=배민_오픈울트라_주문건수)
     st.metric(label="배민 오픈리스트/울트라콜 매출", value=배민_오픈울트라_매출)
@@ -320,8 +325,7 @@ with c5:
     st.metric(label="배민 기타 주문건수", value=배민_기타_주문건수)
     st.metric(label="배민 기타 매출", value=배민_기타_매출)
 with c6:
-    st.metric(label="배민 배민1 주문건수", value=배민_원_주문건수)
-    st.metric(label="배민 배민1 매출", value=배민_원_매출)
+    st.metric(label="배달의민족 포장 주문건수", value=배민_포장_건수)
     
 c1, c2 = st.columns([1,1])
 with c1:
