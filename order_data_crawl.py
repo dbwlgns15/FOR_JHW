@@ -28,7 +28,7 @@ time.sleep(1)
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/div[1]/span/input').send_keys(bm_id)  # ID입력
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/div[2]/span/input').send_keys(bm_pw)  # PW입력
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/button').click()  # 로그인 버튼 클릭
-time.sleep(2)
+time.sleep(3)
 
 # driver.find_element("xpath", '//*[@id="root"]/div/div[3]/div[2]/div[1]/div/div[1]/button[1]').click()  # 기간 버튼 클릭 여기
 # time.sleep(1)
@@ -52,17 +52,23 @@ while True:
         # time.sleep(0.5)
         html = driver.page_source
         bs = BeautifulSoup(html, 'html.parser')
-        table = bs.findAll('table', {'class': 'bsds-table css-18du3ut'})[0].findAll('tbody')[0].findAll('tr')
+        table = bs.findAll('table', {'class': 'bsds-table DesktopVersion-module__DcMM css-18du3ut'})[0].findAll('tbody')[0].findAll('tr')
+        # print(table)
         for i in range(20):
 
             if i % 2 == 0: # 주문번호, 기타, 주문날짜, 주문시간, 주문요일, 주문금액
                 order_num = str(table[i].findAll('td')[1].text)[4:]
+                # print(order_num)
                 order_gita = str(table[i].findAll('td')[3].text)
+                
                 if order_gita == '배민1 한집배달':
                     order_gita = '배민1'
+                # print(order_gita)
                 raw_date = str(table[i].findAll('td')[2].text).split()
                 order_date = f'{raw_date[0][:-1]}-{raw_date[1][:-1]}-{raw_date[2][:-1]}'
+                # print(order_date)
                 order_time = int(raw_date[-1].split(':')[0])
+                # print(order_time)
                 order_marketing = 0
                 if raw_date[-2] == '오후': # 오후면 시간을 24시 기준으로 맞추기 위해 12 더하기
                     order_time += 12
@@ -71,13 +77,15 @@ while True:
                 elif order_time == 12: # 오전 12시는 24시로 변경
                     order_time = 24
                 order_week = raw_date[3][1:-1]
+                # print(order_week)
                 order_price = str(table[i].findAll('td')[8].text).replace(',', '').replace('원', '')
+                # print(order_price)
                 
                 if order_date == check_date: # 날짜 체크
                     check = 1
                     
             if i % 2 == 1: # 상세 메뉴
-                detail = table[i].findAll('div', {'class': 'DetailInfo-module__DjeY'})[0].findAll('div')
+                detail = table[i].findAll('div', {'class': 'DetailInfo-module__j9yH'})[0].findAll('div')
                 menu_cnt = {} # 메뉴 카운트 리셋
                 for menu in menu_list:
                     menu_cnt[menu] = 0

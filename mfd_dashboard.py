@@ -290,6 +290,8 @@ temp_df6['주문시간'] = temp_df6.astype('str')['주문시간'] +'시'
 배민_쿠폰_지출 = format(df_days[df_days['플랫폼'] == '배달의민족']['매장부담금액'].sum(),',d') + '원'
 요기요_쿠폰_지출 = format(df_days[df_days['플랫폼'] == '요기요']['매장부담금액'].sum(),',d') + '원'
 쿠팡이츠_쿠폰_광고_지출 = format(df_days[df_days['플랫폼'] == '쿠팡이츠']['매장부담금액'].sum(),',d') + '원'
+쿠팡이츠_삼만오천원_건수 = df_days[df_days['플랫폼'] == '쿠팡이츠']
+쿠팡이츠_삼만오천원_건수 = str(len(쿠팡이츠_삼만오천원_건수[쿠팡이츠_삼만오천원_건수['주문금액'] >= 35000]))+'건'
 
 기간_총_매출 = format(df_days['주문금액'].sum(),',d') + '원'
 기간_평균_매출 = format(int(df_days['주문금액'].sum() / df_days['주문날짜'].nunique()),',d') + '원'
@@ -311,6 +313,7 @@ with c2:
     st.metric(label="배달의민족 쿠폰 지출 금액", value=배민_쿠폰_지출)
     st.metric(label="요기요 쿠폰 지출 금액", value=요기요_쿠폰_지출)
     st.metric(label="쿠팡이츠 쿠폰 및 광고 지출 금액", value=쿠팡이츠_쿠폰_광고_지출)
+    st.metric(label="쿠팡이츠 35000원 이상 주문건수", value=쿠팡이츠_삼만오천원_건수)
 
 with c3:
     st.metric(label="배민 배민1 주문건수", value=배민_원_주문건수)
