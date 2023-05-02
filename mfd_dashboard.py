@@ -280,6 +280,8 @@ temp_df6['주문시간'] = temp_df6.astype('str')['주문시간'] +'시'
 배민_오픈울트라_매출 = format(df_days[df_days['기타'] == '오픈리스트']['주문금액'].sum() + df_days[df_days['기타'] == '울트라콜']['주문금액'].sum(),',d') + '원'
 배민_기타_주문건수 = str(len(df_days[df_days['기타'] == '기타'])) + '건'
 배민_기타_매출 =  format(df_days[df_days['기타'] == '기타']['주문금액'].sum(),',d') + '원'
+배민_알뜰배달_주문건수 = str(len(df_days[df_days['기타'] == '알뜰배달'])) + '건'
+배민_알뜰배달_매출 =  format(df_days[df_days['기타'] == '알뜰배달']['주문금액'].sum(),',d') + '원'
 배민_원_주문건수 = str(len(df_days[df_days['기타'] == '배민1'])) + '건'
 배민_원_매출 = format(df_days[df_days['기타'] == '배민1']['주문금액'].sum(),',d') + '원'
 배민_원_삼만오천원_건수 = df_days[df_days['플랫폼'] == '배달의민족'][df_days['기타'] == '배민1']
@@ -328,7 +330,11 @@ with c5:
     st.metric(label="배민 기타 주문건수", value=배민_기타_주문건수)
     st.metric(label="배민 기타 매출", value=배민_기타_매출)
 with c6:
-    st.metric(label="배달의민족 포장 주문건수", value=배민_포장_건수)
+    st.metric(label="배민 알뜰배달 주문건수", value=배민_알뜰배달_주문건수)
+    st.metric(label="배민 알뜰배달 매출", value=배민_알뜰배달_매출)
+    pass
+with c7:
+    st.metric(label="배민 포장 주문건수", value=배민_포장_건수)
     
 c1, c2 = st.columns([1,1])
 with c1:
