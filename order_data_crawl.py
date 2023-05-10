@@ -149,13 +149,13 @@ driver.find_element("xpath", '//*[@id="merchant-login"]/div/div[2]/div/div/div/f
 time.sleep(5)
 
 driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[3]/div[2]/button[1]').click()
-time.sleep(1)
+time.sleep(2)
 
 driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[3]/button[2]').click()
-time.sleep(1)
+time.sleep(2)
 
 driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[2]/button').click()
-time.sleep(1)
+time.sleep(2)
 
 driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[2]/div/div/div/button').click() # 광고 종료 클릭
 time.sleep(0.2)
