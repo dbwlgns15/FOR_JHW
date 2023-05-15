@@ -242,8 +242,12 @@ for i in range(len(yogiyo_df)):
     order_week = ['월','화','수','목','금','토','일'][datetime.date(int(order_date.split('-')[0]),int(order_date.split('-')[1]),int(order_date.split('-')[2])).weekday()]
     order_price = yogiyo_df.loc[i]['주문금액']
     order_marketing = yogiyo_df.loc[i]['사장님자체할인']
-    order_gu = re.findall('[가-힣]{1,3}구', yogiyo_df.loc[i]['배달주소1'])[0]
-    order_dong = re.findall('\((.+동)\)', yogiyo_df.loc[i]['배달주소1'])[0]
+    try:
+        order_gu = re.findall('[가-힣]{1,3}구', yogiyo_df.loc[i]['배달주소1'])[0]
+        order_dong = re.findall('\((.+동)\)', yogiyo_df.loc[i]['배달주소1'])[0]
+    except:
+        order_gu = '요기요포장'
+        order_dong = '요기요포장'
     data.append([order_num, '요기요', '', order_date, order_time, order_week, order_price, order_marketing, order_gu, order_dong])
 
 df_temp = pd.read_csv('./TEMP/yogiyo_order.csv',encoding='utf-8') # 요기요 주문 데이터 불러오기
