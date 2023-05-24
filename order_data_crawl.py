@@ -146,16 +146,16 @@ time.sleep(3)
 driver.find_element("xpath", '//*[@id="loginId"]').send_keys(cp_id) # ID입력
 driver.find_element("xpath", '//*[@id="password"]').send_keys(cp_pw) # PW입력
 driver.find_element("xpath", '//*[@id="merchant-login"]/div/div[2]/div/div/div/form/button').click() # 로그인 버튼 클릭
-time.sleep(5)
+time.sleep(6)
 
 driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[3]/div[2]/button[1]').click()
-time.sleep(2)
+time.sleep(3)
 
 driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[3]/button[2]').click()
-time.sleep(2)
+time.sleep(3)
 
 driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[2]/button').click()
-time.sleep(2)
+time.sleep(3)
 
 driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[2]/div/div/div/button').click() # 광고 종료 클릭
 time.sleep(0.2)
