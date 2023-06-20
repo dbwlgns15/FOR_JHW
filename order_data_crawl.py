@@ -137,7 +137,8 @@ check_date = df_temp.loc[0]['주문날짜']
 
 options = webdriver.ChromeOptions()
 options.add_argument("--disable-blink-features=AutomationControlled") # 쿠팡에서 차단을 막기위해 자동조작되고 있음을 숨기기
-coupang_url = 'https://store.coupangeats.com/merchant/management/'
+# coupang_url = 'https://store.coupangeats.com/merchant/management/'
+coupang_url = 'https://store.coupangeats.com/merchant/management/orders/490509'
 driver = webdriver.Chrome("./TEMP/chromedriver",options=options)
 
 driver.get(coupang_url) # 쿠팡이츠 사장님 사이트 접속

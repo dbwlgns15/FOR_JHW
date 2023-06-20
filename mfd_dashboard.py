@@ -15,11 +15,11 @@ df['주문날짜'] = pd.to_datetime(df['주문날짜'])
 with open("./GEOJSON/my_geojson.geojson", "r") as raw_json: # geojson 맵 파일 불러오기
     my_geojson = json.load(raw_json)
     
-mfd_logo = Image.open('./IMG/MFD_logo.png') # 로고 불러오기
+mfd_logo = Image.open('./IMG/MFD_logo_1.png') # 로고 불러오기
 mfd_logo_2 = Image.open('./IMG/MFD_logo_2.png')
 baemin_logo = Image.open('./IMG/baemin.png')
-yogiyo_logo = Image.open('./IMG/yogiyo.jpg')
-coupang_logo = Image.open('./IMG/coupang.jpg')
+yogiyo_logo = Image.open('./IMG/yogiyo.png')
+coupang_logo = Image.open('./IMG/coupang.png')
 
 ########################################################################################################################################################################
 ########################################################################################################################################################################
@@ -255,23 +255,23 @@ days = st.date_input("기간을 입력해주세요.",
                     max_value=datetime.datetime.today())
 df_days = df[df['주문날짜']>=np.datetime64(days[0])][df['주문날짜']<=np.datetime64(days[1])] 
 
-temp_df5 = df_days['주문시간'].value_counts().loc[[11,12,13,14,15,16,17,18,19,20,21,22]].reset_index().rename(columns = {'index':'주문시간','주문시간':'주문건수(건)'})
-temp_df5['주문시간'] = temp_df5.astype('str')['주문시간'] +'시'
-temp_df6 = df_days[['주문시간','주문금액']].groupby('주문시간').sum().loc[[11,12,13,14,15,16,17,18,19,20,21,22]].reset_index()
-temp_df6['주문시간'] = temp_df6.astype('str')['주문시간'] +'시'
+# temp_df5 = df_days['주문시간'].value_counts().loc[[11,12,13,14,15,16,17,18,19,20,21,22]].reset_index().rename(columns = {'index':'주문시간','주문시간':'주문건수(건)'})
+# temp_df5['주문시간'] = temp_df5.astype('str')['주문시간'] +'시'
+# temp_df6 = df_days[['주문시간','주문금액']].groupby('주문시간').sum().loc[[11,12,13,14,15,16,17,18,19,20,21,22]].reset_index()
+# temp_df6['주문시간'] = temp_df6.astype('str')['주문시간'] +'시'
 
-기간_시간별_총_매출 = px.bar(temp_df6,
-                    x = '주문시간', y = '주문금액', title = '시간별 총 매출',
-                    color='주문금액',
-                    text_auto=True,
-                    color_continuous_scale=px.colors.sequential.Bluyl)
-기간_시간별_총_매출.update_layout(yaxis_tickformat = ',d')
+# 기간_시간별_총_매출 = px.bar(temp_df6,
+#                     x = '주문시간', y = '주문금액', title = '시간별 총 매출',
+#                     color='주문금액',
+#                     text_auto=True,
+#                     color_continuous_scale=px.colors.sequential.Bluyl)
+# 기간_시간별_총_매출.update_layout(yaxis_tickformat = ',d')
 
-기간_시간별_주문건수 = px.bar(temp_df5,
-                    x = '주문시간', y = '주문건수(건)', title = '시간별 주문건수',
-                    color='주문건수(건)',
-                    text_auto=True,
-                    color_continuous_scale=px.colors.sequential.Bluyl)
+# 기간_시간별_주문건수 = px.bar(temp_df5,
+#                     x = '주문시간', y = '주문건수(건)', title = '시간별 주문건수',
+#                     color='주문건수(건)',
+#                     text_auto=True,
+#                     color_continuous_scale=px.colors.sequential.Bluyl)
 
 배민_포장_건수 = df_days[df_days['플랫폼'] == '배달의민족']
 배민_포장_건수 = str(len(배민_포장_건수[배민_포장_건수['기타'] == '배민포장주문'])) + '건'
@@ -284,9 +284,11 @@ temp_df6['주문시간'] = temp_df6.astype('str')['주문시간'] +'시'
 배민_알뜰배달_매출 =  format(df_days[df_days['기타'] == '알뜰배달']['주문금액'].sum(),',d') + '원'
 배민_원_주문건수 = str(len(df_days[df_days['기타'] == '배민1'])) + '건'
 배민_원_매출 = format(df_days[df_days['기타'] == '배민1']['주문금액'].sum(),',d') + '원'
-배민_원_삼만오천원_건수 = df_days[df_days['플랫폼'] == '배달의민족'][df_days['기타'] == '배민1']
+배민_원_삼만오천원_건수 = df_days[df_days['플랫폼'] == '배달의민족']
+배민_원_삼만오천원_건수 = 배민_원_삼만오천원_건수[배민_원_삼만오천원_건수['기타'] == '배민1']
 배민_원_삼만오천원_건수 = str(len(배민_원_삼만오천원_건수[배민_원_삼만오천원_건수['주문금액'] >= 35000]))+'건'
-배민_원_삼만원_건수 = df_days[df_days['플랫폼'] == '배달의민족'][df_days['기타'] == '배민1']
+배민_원_삼만원_건수 = df_days[df_days['플랫폼'] == '배달의민족']
+배민_원_삼만원_건수 = 배민_원_삼만원_건수[배민_원_삼만원_건수['기타'] == '배민1']
 배민_원_삼만원_건수 = str(len(배민_원_삼만원_건수[배민_원_삼만원_건수['주문금액'] >= 30000]))+'건'
 
 배민_쿠폰_지출 = format(df_days[df_days['플랫폼'] == '배달의민족']['매장부담금액'].sum(),',d') + '원'
@@ -300,7 +302,7 @@ temp_df6['주문시간'] = temp_df6.astype('str')['주문시간'] +'시'
 기간_영업일 = str(df_days['주문날짜'].nunique()) + '일'
 기간_평균_주문건수 = str((df_days[['주문날짜','주문금액']].groupby('주문날짜').count().mean()[-1]).round(1)) + '건'
 기간_객단가 = format(int(df_days['주문금액'].mean().round(0)),',d') + '원'
-
+        
 #########################################################################################################################################################################
 #######################################################################################################################################################################
 
@@ -335,13 +337,45 @@ with c6:
     pass
 with c7:
     st.metric(label="배민 포장 주문건수", value=배민_포장_건수)
-    
-c1, c2 = st.columns([1,1])
-with c1:
-    st.plotly_chart(기간_시간별_총_매출, use_container_width=True)
-with c2:
-    st.plotly_chart(기간_시간별_주문건수, use_container_width=True)
+   
+#########################################################################################################################################################################
+#######################################################################################################################################################################
 
+히스토그램_옵션 = st.selectbox("구간금액 선택", ("1000원", "500원", "100원"))
+if 히스토그램_옵션 == '1000원':
+    히스토그램_옵션 = 38
+if 히스토그램_옵션 == '500원':
+    히스토그램_옵션 = 80
+if 히스토그램_옵션 == '100원':
+    히스토그램_옵션 = 400
+    
+기간_매출_히스토그램_리스트 = []
+for i in df_days['주문금액'].to_list():
+    if 10000 <= i <= 30000:
+        기간_매출_히스토그램_리스트.append(i)
+        
+기간_매출_히스토그램 = px.histogram(기간_매출_히스토그램_리스트, nbins=히스토그램_옵션, 
+                           title='10000원 이상 30000원 이하 주문건수 히스토그램',
+                           text_auto=True,
+                           labels={'value': '주문금액(원)', 'count': '주문건수(건)'})
+기간_매출_히스토그램.update_layout(bargap=0.1, 
+                          showlegend=False, 
+                          xaxis_tickformat = ',d')
+
+st.plotly_chart(기간_매출_히스토그램, use_container_width=True)
+
+만오천미만_주문건수, 만오천이상_주문건수 = 0, 0
+for i in df_days['주문금액'].to_list():
+    if i < 15900:
+        만오천미만_주문건수 += 1
+    else:
+        만오천이상_주문건수 +=1
+        
+st.metric(label="15900원 미만 주문건수", value=만오천미만_주문건수)
+st.metric(label="15900원 이상 주문건수", value=만오천이상_주문건수)
+
+#########################################################################################################################################################################
+#########################################################################################################################################################################
 
 st.subheader('원본 주문 데이터')
 st.dataframe(df_days)
