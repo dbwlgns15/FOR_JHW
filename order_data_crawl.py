@@ -4,6 +4,7 @@ import datetime
 import re
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 
 data = []
 
@@ -13,62 +14,43 @@ bm_pw = str(id_pw.readline()).strip()
 cp_id = str(id_pw.readline()).strip()
 cp_pw = str(id_pw.readline()).strip()
 
+s = Service('./TEMP/chromedriver"') # Service 객체 생성
+driver = webdriver.Chrome(service=s) # 웹 드라이버 생성 및 Service 객체 전달
 ################# 배단의민족 ################################################
 ############################################################################
 
-df_temp =  pd.read_csv('./TEMP/order_data.csv',encoding='utf-8') # 최근 날짜 체크
+df_temp =  pd.read_csv('./TEMP/order_data.csv',encoding='utf-8',low_memory=False) # 최근 날짜 체크
 df_temp = df_temp[df_temp['플랫폼'] == '배달의민족'].reset_index(drop=True)
 check_date = df_temp.loc[0]['주문날짜']
 
-driver = webdriver.Chrome("./TEMP/chromedriver")
 baemin_url = 'https://ceo.baemin.com/self-service/orders/history'
-
 driver.get(baemin_url)  # 배달의민족 사장님 사이트 접속
 time.sleep(1)
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/div[1]/span/input').send_keys(bm_id)  # ID입력
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/div[2]/span/input').send_keys(bm_pw)  # PW입력
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/button').click()  # 로그인 버튼 클릭
-time.sleep(3)
-
-# driver.find_element("xpath", '//*[@id="root"]/div/div[3]/div[2]/div[1]/div/div[1]/button[1]').click()  # 기간 버튼 클릭 여기
-# time.sleep(1)
-
-# driver.find_element("xpath", '//*[@id="root"]/div/div[4]/div[1]/form/div[2]/div/div/div[1]/label[2]').click()  # 월 버튼 클릭
-# time.sleep(0.5)
-
-# driver.find_element("xpath", '//*[@id="root"]/div/div[4]/div[1]/form/div[2]/div/div/div[2]/div/div/div[5]/label/input').click()  # 지난 6개월 버튼 선택
-# time.sleep(0.5)
-
-# driver.find_element("xpath", '//*[@id="root"]/div/div[4]/div[1]/form/div[3]/button').click()  # 적용 버튼 선택
-# time.sleep(1)
+time.sleep(4)
 
 menu_list = ['고소한 삼겹', '고단백 삼겹', '황금비율 삼겹', '세트 (250g)', '고기만 (250g)', '고기만 (500g)', '100g', '200g',
-             '쌈장', '와사비', '말돈소금', '명이나물', '쌈무', '김치', '된장찌개', '편마늘', '고추', '공기밥', '계란찜',
-             '사이다 500', '코카콜라 355', '코카콜라 500', '제로콜라 355', '제로콜라 500']
+              '쌈장', '와사비', '말돈소금', '명이나물', '쌈무', '김치', '된장찌개', '편마늘', '고추', '공기밥', '계란찜',
+              '사이다 500', '코카콜라 355', '코카콜라 500', '제로콜라 355', '제로콜라 500']
 check = 0
 while True:
     try:
-        # driver.find_element("xpath", '//*[@id="root"]/div/div[3]/div[2]/div[1]/div/div[3]/button').click()  # 펼쳐보기 버튼 클릭
-        # time.sleep(0.5)
         html = driver.page_source
         bs = BeautifulSoup(html, 'html.parser')
         table = bs.findAll('table', {'class': 'bsds-table DesktopVersion-module__DcMM css-18du3ut'})[0].findAll('tbody')[0].findAll('tr')
-        # print(table)
         for i in range(20):
 
             if i % 2 == 0: # 주문번호, 기타, 주문날짜, 주문시간, 주문요일, 주문금액
                 order_num = str(table[i].findAll('td')[1].text)[4:]
-                # print(order_num)
                 order_gita = str(table[i].findAll('td')[3].text)
                 
                 if order_gita == '배민1 한집배달':
                     order_gita = '배민1'
-                # print(order_gita)
                 raw_date = str(table[i].findAll('td')[2].text).split()
                 order_date = f'{raw_date[0][:-1]}-{raw_date[1][:-1]}-{raw_date[2][:-1]}'
-                # print(order_date)
                 order_time = int(raw_date[-1].split(':')[0])
-                # print(order_time)
                 order_marketing = 0
                 if raw_date[-2] == '오후': # 오후면 시간을 24시 기준으로 맞추기 위해 12 더하기
                     order_time += 12
@@ -77,9 +59,7 @@ while True:
                 elif order_time == 12: # 오전 12시는 24시로 변경
                     order_time = 24
                 order_week = raw_date[3][1:-1]
-                # print(order_week)
                 order_price = str(table[i].findAll('td')[8].text).replace(',', '').replace('원', '')
-                # print(order_price)
                 
                 if order_date == check_date: # 날짜 체크
                     check = 1
@@ -137,7 +117,6 @@ check_date = df_temp.loc[0]['주문날짜']
 
 options = webdriver.ChromeOptions()
 options.add_argument("--disable-blink-features=AutomationControlled") # 쿠팡에서 차단을 막기위해 자동조작되고 있음을 숨기기
-# coupang_url = 'https://store.coupangeats.com/merchant/management/'
 coupang_url = 'https://store.coupangeats.com/merchant/management/orders/490509'
 driver = webdriver.Chrome("./TEMP/chromedriver",options=options)
 
@@ -149,27 +128,25 @@ driver.find_element("xpath", '//*[@id="password"]').send_keys(cp_pw) # PW입력
 driver.find_element("xpath", '//*[@id="merchant-login"]/div/div[2]/div/div/div/form/button').click() # 로그인 버튼 클릭
 time.sleep(6)
 
-driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[3]/div[2]/button[1]').click()
-time.sleep(3)
-
-driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[3]/button[2]').click()
-time.sleep(3)
-
-driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/div[2]/button').click()
-time.sleep(3)
-
-driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[2]/div/div/div/button').click() # 광고 종료 클릭
+try: # 광고가 뜨면 하고 아니면 패스
+    driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[4]/div/div/div/button').click() # x
+    time.sleep(0.5)
+    driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/button').click() # x
+    time.sleep(0.5)
+    driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[2]/div/div/div/button').click() # x
+    time.sleep(0.5)
+    driver.find_element("xpath", '//*[@id="merchant-management"]/div/div/header/a/img').click() # 메뉴
+    time.sleep(0.5)
+    driver.find_element("xpath", '//*[@id="merchant-management"]/div/nav/div[2]/ul/li[3]/a').click() # 매출관리
+    time.sleep(0.5)
+except:
+    driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[2]/div/div/div/button').click() # 신고 광고 x
+    time.sleep(0.5)
+    
+driver.find_element("xpath", '//*[@id="merchant-management"]/div/div/div[2]/div[1]/div/div/div/div[1]/div[2]/div[2]/div/div[1]').click() # 기간선택 버튼 클릭
 time.sleep(0.2)
-
-driver.find_element("xpath", '//*[@id="merchant-management"]/div/nav/div[2]/ul/li[2]/a').click() # 매출관리 버튼 클릭
-time.sleep(2)
-
-driver.find_element("xpath", '//*[@id="merchant-management"]/div/div/div[2]/div[1]/div/div/div/div[1]/div[2]/div[2]/div').click() # 기간선택 버튼 클릭
-time.sleep(0.2)
-
 driver.find_element("xpath", '//*[@id="merchant-management"]/div/div/div[2]/div[1]/div/div/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[6]/div/label').click() # 1년 버튼 클릭
 time.sleep(0.2)
-
 driver.find_element("xpath", '//*[@id="merchant-management"]/div/div/div[2]/div[1]/div/div/div/div[1]/div[2]/div[2]/button').click() # 조회 버튼 클릭
 time.sleep(2)
 
