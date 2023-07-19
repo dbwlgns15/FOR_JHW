@@ -111,7 +111,7 @@ for i in range(len(df_temp)):
 ################# 쿠팡이츠 ##################################################
 ############################################################################
 
-df_temp =  pd.read_csv('./TEMP/order_data.csv',encoding='utf-8') # 최근 날짜 체크
+df_temp =  pd.read_csv('./TEMP/order_data.csv',encoding='utf-8',low_memory=False) # 최근 날짜 체크
 df_temp = df_temp[df_temp['플랫폼'] == '쿠팡이츠'].reset_index(drop=True)
 check_date = df_temp.loc[0]['주문날짜']
 
@@ -212,7 +212,7 @@ for i in range(len(df_temp)): # 쿠팡 주문 데이터 불러오기
 ################# 요기요 ###################################################
 ############################################################################
 
-yogiyo_df = pd.read_csv('./TEMP/yogiyo_raw.csv',encoding='utf-8')
+yogiyo_df = pd.read_csv('./TEMP/yogiyo_raw.csv',encoding='utf-8',low_memory=False)
 for i in range(len(yogiyo_df)):
     order_num = yogiyo_df.loc[i]['주문번호'].split()[1]
     order_date = yogiyo_df.loc[i]['거래일시'].split()[0]
