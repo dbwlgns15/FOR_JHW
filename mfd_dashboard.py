@@ -191,202 +191,202 @@ st.set_page_config(page_title='MFD Dash Board',
 
 st.write(str(df.iloc[0,3]).split()[0]+' 기준 (현장결제건 제외)')
 
-_,c1,_, c2,_, c3,_, c4,_ = st.columns([2,10,2,10,2,10,2,10,2])
-with c1:
-    st.image(mfd_logo_2)
-with c2:
-    st.image(yogiyo_logo)
-with c3:
-    st.image(baemin_logo)
-with c4:
-    st.image(coupang_logo)
+# _,c1,_, c2,_, c3,_, c4,_ = st.columns([2,10,2,10,2,10,2,10,2])
+# with c1:
+#     st.image(mfd_logo_2)
+# with c2:
+#     st.image(yogiyo_logo)
+# with c3:
+#     st.image(baemin_logo)
+# with c4:
+#     st.image(coupang_logo)
 
-_,c1,_, c2,_, c3,_, c4,_ = st.columns([2,10,2,10,2,10,2,10,2])
-with c1:
-    st.metric(label="총 매출", value=총_매출, delta=최근_매출)
-    st.metric(label="총 주문건수", value=총_주문건수, delta=최근_주문건수)
-with c2:
-    st.metric(label="요기요 총 매출", value=요기요_총_매출, delta=요기요_최근_매출)
-    st.metric(label="요기요 총 주문건수", value=요기요_총_주문건수, delta=요기요_최근_주문건수)   
-with c3:
-    st.metric(label="배달의민족 총 매출", value=배민_총_매출, delta=배민_최근_매출)
-    st.metric(label="배달의민족 총 주문건수", value=배민_총_주문건수, delta=배민_최근_주문건수)   
-with c4:
-    st.metric(label="쿠팡이츠 총 매출", value=쿠팡_총_매출, delta=쿠팡_최근_매출)
-    st.metric(label="쿠팡이츠 총 주문건수", value=쿠팡_총_주문건수, delta=쿠팡_최근_주문건수)   
+# _,c1,_, c2,_, c3,_, c4,_ = st.columns([2,10,2,10,2,10,2,10,2])
+# with c1:
+#     st.metric(label="총 매출", value=총_매출, delta=최근_매출)
+#     st.metric(label="총 주문건수", value=총_주문건수, delta=최근_주문건수)
+# with c2:
+#     st.metric(label="요기요 총 매출", value=요기요_총_매출, delta=요기요_최근_매출)
+#     st.metric(label="요기요 총 주문건수", value=요기요_총_주문건수, delta=요기요_최근_주문건수)   
+# with c3:
+#     st.metric(label="배달의민족 총 매출", value=배민_총_매출, delta=배민_최근_매출)
+#     st.metric(label="배달의민족 총 주문건수", value=배민_총_주문건수, delta=배민_최근_주문건수)   
+# with c4:
+#     st.metric(label="쿠팡이츠 총 매출", value=쿠팡_총_매출, delta=쿠팡_최근_매출)
+#     st.metric(label="쿠팡이츠 총 주문건수", value=쿠팡_총_주문건수, delta=쿠팡_최근_주문건수)   
 
-c1, c2 = st.columns([1,1])
-with c1:
-    st.plotly_chart(총_일별_매출, use_container_width=True)
-    st.plotly_chart(플랫폼_일별_매출, use_container_width=True)
-    st.plotly_chart(요일별_평균_매출, use_container_width=True)
-    st.plotly_chart(시간별_총_매출, use_container_width=True)
-with c2:
-    st.plotly_chart(총_일별_주문건수, use_container_width=True)
-    st.plotly_chart(플랫폼_일별_주문건수, use_container_width=True)
-    st.plotly_chart(요일별_평균_주문건수, use_container_width=True)
-    st.plotly_chart(시간별_주문건수, use_container_width=True)
+# c1, c2 = st.columns([1,1])
+# with c1:
+#     st.plotly_chart(총_일별_매출, use_container_width=True)
+#     st.plotly_chart(플랫폼_일별_매출, use_container_width=True)
+#     st.plotly_chart(요일별_평균_매출, use_container_width=True)
+#     st.plotly_chart(시간별_총_매출, use_container_width=True)
+# with c2:
+#     st.plotly_chart(총_일별_주문건수, use_container_width=True)
+#     st.plotly_chart(플랫폼_일별_주문건수, use_container_width=True)
+#     st.plotly_chart(요일별_평균_주문건수, use_container_width=True)
+#     st.plotly_chart(시간별_주문건수, use_container_width=True)
 
-c1, c2, c3, c4 = st.columns([1,1,1,1])
-with c1:
-    st.plotly_chart(메인메뉴, use_container_width=True)
-with c2:
-    st.plotly_chart(살코기, use_container_width=True)
-with c3:
-    st.plotly_chart(소스, use_container_width=True)
-with c4:
-    st.plotly_chart(고기추가, use_container_width=True)
+# c1, c2, c3, c4 = st.columns([1,1,1,1])
+# with c1:
+#     st.plotly_chart(메인메뉴, use_container_width=True)
+# with c2:
+#     st.plotly_chart(살코기, use_container_width=True)
+# with c3:
+#     st.plotly_chart(소스, use_container_width=True)
+# with c4:
+#     st.plotly_chart(고기추가, use_container_width=True)
     
-st.plotly_chart(일평균_메뉴별_주문량, use_container_width=True)
+# st.plotly_chart(일평균_메뉴별_주문량, use_container_width=True)
 
-c1, c2 = st.columns([3,4])
-with c1:
-    st.plotly_chart(행정동별_주문건수_지도, use_container_width=True)
-with c2:
-    st.plotly_chart(행정동별_주문건수, use_container_width=True)
-    st.plotly_chart(행정구별_주문건수, use_container_width=True)
+# c1, c2 = st.columns([3,4])
+# with c1:
+#     st.plotly_chart(행정동별_주문건수_지도, use_container_width=True)
+# with c2:
+#     st.plotly_chart(행정동별_주문건수, use_container_width=True)
+#     st.plotly_chart(행정구별_주문건수, use_container_width=True)
 
-#########################################################################################################################################################################
-#######################################################################################################################################################################
+# #########################################################################################################################################################################
+# #######################################################################################################################################################################
 
-days = st.date_input("기간을 입력해주세요.", 
-                    value = [datetime.date(2022, 10, 19), datetime.datetime.today()],
-                    min_value=datetime.date(2022, 10, 19), 
-                    max_value=datetime.datetime.today())
-df_days = df[df['주문날짜']>=np.datetime64(days[0])][df['주문날짜']<=np.datetime64(days[1])] 
+# days = st.date_input("기간을 입력해주세요.", 
+#                     value = [datetime.date(2022, 10, 19), datetime.datetime.today()],
+#                     min_value=datetime.date(2022, 10, 19), 
+#                     max_value=datetime.datetime.today())
+# df_days = df[df['주문날짜']>=np.datetime64(days[0])][df['주문날짜']<=np.datetime64(days[1])] 
 
-# temp_df5 = df_days['주문시간'].value_counts().loc[[11,12,13,14,15,16,17,18,19,20,21,22]].reset_index().rename(columns = {'index':'주문시간','주문시간':'주문건수(건)'})
-# temp_df5['주문시간'] = temp_df5.astype('str')['주문시간'] +'시'
-# temp_df6 = df_days[['주문시간','주문금액']].groupby('주문시간').sum().loc[[11,12,13,14,15,16,17,18,19,20,21,22]].reset_index()
-# temp_df6['주문시간'] = temp_df6.astype('str')['주문시간'] +'시'
+# # temp_df5 = df_days['주문시간'].value_counts().loc[[11,12,13,14,15,16,17,18,19,20,21,22]].reset_index().rename(columns = {'index':'주문시간','주문시간':'주문건수(건)'})
+# # temp_df5['주문시간'] = temp_df5.astype('str')['주문시간'] +'시'
+# # temp_df6 = df_days[['주문시간','주문금액']].groupby('주문시간').sum().loc[[11,12,13,14,15,16,17,18,19,20,21,22]].reset_index()
+# # temp_df6['주문시간'] = temp_df6.astype('str')['주문시간'] +'시'
 
-# 기간_시간별_총_매출 = px.bar(temp_df6,
-#                     x = '주문시간', y = '주문금액', title = '시간별 총 매출',
-#                     color='주문금액',
-#                     text_auto=True,
-#                     color_continuous_scale=px.colors.sequential.Bluyl)
-# 기간_시간별_총_매출.update_layout(yaxis_tickformat = ',d')
+# # 기간_시간별_총_매출 = px.bar(temp_df6,
+# #                     x = '주문시간', y = '주문금액', title = '시간별 총 매출',
+# #                     color='주문금액',
+# #                     text_auto=True,
+# #                     color_continuous_scale=px.colors.sequential.Bluyl)
+# # 기간_시간별_총_매출.update_layout(yaxis_tickformat = ',d')
 
-# 기간_시간별_주문건수 = px.bar(temp_df5,
-#                     x = '주문시간', y = '주문건수(건)', title = '시간별 주문건수',
-#                     color='주문건수(건)',
-#                     text_auto=True,
-#                     color_continuous_scale=px.colors.sequential.Bluyl)
+# # 기간_시간별_주문건수 = px.bar(temp_df5,
+# #                     x = '주문시간', y = '주문건수(건)', title = '시간별 주문건수',
+# #                     color='주문건수(건)',
+# #                     text_auto=True,
+# #                     color_continuous_scale=px.colors.sequential.Bluyl)
 
-배민_포장_건수 = df_days[df_days['플랫폼'] == '배달의민족']
-배민_포장_건수 = str(len(배민_포장_건수[배민_포장_건수['기타'] == '배민포장주문'])) + '건'
+# 배민_포장_건수 = df_days[df_days['플랫폼'] == '배달의민족']
+# 배민_포장_건수 = str(len(배민_포장_건수[배민_포장_건수['기타'] == '배민포장주문'])) + '건'
 
-배민_오픈울트라_주문건수 = str(len(df_days[df_days['기타'] == '오픈리스트']) + len(df_days[df_days['기타'] == '울트라콜'])) + '건'
-배민_오픈울트라_매출 = format(df_days[df_days['기타'] == '오픈리스트']['주문금액'].sum() + df_days[df_days['기타'] == '울트라콜']['주문금액'].sum(),',d') + '원'
-배민_기타_주문건수 = str(len(df_days[df_days['기타'] == '기타'])) + '건'
-배민_기타_매출 =  format(df_days[df_days['기타'] == '기타']['주문금액'].sum(),',d') + '원'
-배민_알뜰배달_주문건수 = str(len(df_days[df_days['기타'] == '알뜰배달'])) + '건'
-배민_알뜰배달_매출 =  format(df_days[df_days['기타'] == '알뜰배달']['주문금액'].sum(),',d') + '원'
-배민_원_주문건수 = str(len(df_days[df_days['기타'] == '배민1'])) + '건'
-배민_원_매출 = format(df_days[df_days['기타'] == '배민1']['주문금액'].sum(),',d') + '원'
-배민_원_삼만오천원_건수 = df_days[df_days['플랫폼'] == '배달의민족']
-배민_원_삼만오천원_건수 = 배민_원_삼만오천원_건수[배민_원_삼만오천원_건수['기타'] == '배민1']
-배민_원_삼만오천원_건수 = str(len(배민_원_삼만오천원_건수[배민_원_삼만오천원_건수['주문금액'] >= 35000]))+'건'
-배민_원_삼만원_건수 = df_days[df_days['플랫폼'] == '배달의민족']
-배민_원_삼만원_건수 = 배민_원_삼만원_건수[배민_원_삼만원_건수['기타'] == '배민1']
-배민_원_삼만원_건수 = str(len(배민_원_삼만원_건수[배민_원_삼만원_건수['주문금액'] >= 30000]))+'건'
+# 배민_오픈울트라_주문건수 = str(len(df_days[df_days['기타'] == '오픈리스트']) + len(df_days[df_days['기타'] == '울트라콜'])) + '건'
+# 배민_오픈울트라_매출 = format(df_days[df_days['기타'] == '오픈리스트']['주문금액'].sum() + df_days[df_days['기타'] == '울트라콜']['주문금액'].sum(),',d') + '원'
+# 배민_기타_주문건수 = str(len(df_days[df_days['기타'] == '기타'])) + '건'
+# 배민_기타_매출 =  format(df_days[df_days['기타'] == '기타']['주문금액'].sum(),',d') + '원'
+# 배민_알뜰배달_주문건수 = str(len(df_days[df_days['기타'] == '알뜰배달'])) + '건'
+# 배민_알뜰배달_매출 =  format(df_days[df_days['기타'] == '알뜰배달']['주문금액'].sum(),',d') + '원'
+# 배민_원_주문건수 = str(len(df_days[df_days['기타'] == '배민1'])) + '건'
+# 배민_원_매출 = format(df_days[df_days['기타'] == '배민1']['주문금액'].sum(),',d') + '원'
+# 배민_원_삼만오천원_건수 = df_days[df_days['플랫폼'] == '배달의민족']
+# 배민_원_삼만오천원_건수 = 배민_원_삼만오천원_건수[배민_원_삼만오천원_건수['기타'] == '배민1']
+# 배민_원_삼만오천원_건수 = str(len(배민_원_삼만오천원_건수[배민_원_삼만오천원_건수['주문금액'] >= 35000]))+'건'
+# 배민_원_삼만원_건수 = df_days[df_days['플랫폼'] == '배달의민족']
+# 배민_원_삼만원_건수 = 배민_원_삼만원_건수[배민_원_삼만원_건수['기타'] == '배민1']
+# 배민_원_삼만원_건수 = str(len(배민_원_삼만원_건수[배민_원_삼만원_건수['주문금액'] >= 30000]))+'건'
 
-배민_쿠폰_지출 = format(df_days[df_days['플랫폼'] == '배달의민족']['매장부담금액'].sum(),',d') + '원'
-요기요_쿠폰_지출 = format(df_days[df_days['플랫폼'] == '요기요']['매장부담금액'].sum(),',d') + '원'
-쿠팡이츠_쿠폰_광고_지출 = format(df_days[df_days['플랫폼'] == '쿠팡이츠']['매장부담금액'].sum(),',d') + '원'
-쿠팡이츠_삼만오천원_건수 = df_days[df_days['플랫폼'] == '쿠팡이츠']
-쿠팡이츠_삼만오천원_건수 = str(len(쿠팡이츠_삼만오천원_건수[쿠팡이츠_삼만오천원_건수['주문금액'] >= 35000]))+'건'
+# 배민_쿠폰_지출 = format(df_days[df_days['플랫폼'] == '배달의민족']['매장부담금액'].sum(),',d') + '원'
+# 요기요_쿠폰_지출 = format(df_days[df_days['플랫폼'] == '요기요']['매장부담금액'].sum(),',d') + '원'
+# 쿠팡이츠_쿠폰_광고_지출 = format(df_days[df_days['플랫폼'] == '쿠팡이츠']['매장부담금액'].sum(),',d') + '원'
+# 쿠팡이츠_삼만오천원_건수 = df_days[df_days['플랫폼'] == '쿠팡이츠']
+# 쿠팡이츠_삼만오천원_건수 = str(len(쿠팡이츠_삼만오천원_건수[쿠팡이츠_삼만오천원_건수['주문금액'] >= 35000]))+'건'
 
-기간_총_매출 = format(df_days['주문금액'].sum(),',d') + '원'
-기간_평균_매출 = format(int(df_days['주문금액'].sum() / df_days['주문날짜'].nunique()),',d') + '원'
-기간_영업일 = str(df_days['주문날짜'].nunique()) + '일'
-기간_평균_주문건수 = str((df_days[['주문날짜','주문금액']].groupby('주문날짜').count().mean()[-1]).round(1)) + '건'
-기간_객단가 = format(int(df_days['주문금액'].mean().round(0)),',d') + '원'
+# 기간_총_매출 = format(df_days['주문금액'].sum(),',d') + '원'
+# 기간_평균_매출 = format(int(df_days['주문금액'].sum() / df_days['주문날짜'].nunique()),',d') + '원'
+# 기간_영업일 = str(df_days['주문날짜'].nunique()) + '일'
+# 기간_평균_주문건수 = str((df_days[['주문날짜','주문금액']].groupby('주문날짜').count().mean()[-1]).round(1)) + '건'
+# 기간_객단가 = format(int(df_days['주문금액'].mean().round(0)),',d') + '원'
         
-#########################################################################################################################################################################
-#######################################################################################################################################################################
+# #########################################################################################################################################################################
+# #######################################################################################################################################################################
 
-c1, c2, c3, c4, c5, c6, c7 = st.columns([1,1,1,1,1,1,1])
-with c1:
-    st.metric(label="총 매출", value=기간_총_매출)
-    st.metric(label="평균 매출", value=기간_평균_매출)
-    st.metric(label="객단가", value=기간_객단가)  
-    st.metric(label="평균 주문건수", value=기간_평균_주문건수)  
-    st.metric(label="영업일", value=기간_영업일)  
-with c2:
-    st.metric(label="배달의민족 쿠폰 지출 금액", value=배민_쿠폰_지출)
-    st.metric(label="요기요 쿠폰 지출 금액", value=요기요_쿠폰_지출)
-    st.metric(label="쿠팡이츠 쿠폰 및 광고 지출 금액", value=쿠팡이츠_쿠폰_광고_지출)
-    st.metric(label="쿠팡이츠 35000원 이상 주문건수", value=쿠팡이츠_삼만오천원_건수)
+# c1, c2, c3, c4, c5, c6, c7 = st.columns([1,1,1,1,1,1,1])
+# with c1:
+#     st.metric(label="총 매출", value=기간_총_매출)
+#     st.metric(label="평균 매출", value=기간_평균_매출)
+#     st.metric(label="객단가", value=기간_객단가)  
+#     st.metric(label="평균 주문건수", value=기간_평균_주문건수)  
+#     st.metric(label="영업일", value=기간_영업일)  
+# with c2:
+#     st.metric(label="배달의민족 쿠폰 지출 금액", value=배민_쿠폰_지출)
+#     st.metric(label="요기요 쿠폰 지출 금액", value=요기요_쿠폰_지출)
+#     st.metric(label="쿠팡이츠 쿠폰 및 광고 지출 금액", value=쿠팡이츠_쿠폰_광고_지출)
+#     st.metric(label="쿠팡이츠 35000원 이상 주문건수", value=쿠팡이츠_삼만오천원_건수)
 
-with c3:
-    st.metric(label="배민 배민1 주문건수", value=배민_원_주문건수)
-    st.metric(label="배민 배민1 매출", value=배민_원_매출)
-    st.metric(label="배민 배민1 30000원 이상 주문건수", value=배민_원_삼만원_건수)
-    st.metric(label="배민 배민1 35000원 이상 주문건수", value=배민_원_삼만오천원_건수)
+# with c3:
+#     st.metric(label="배민 배민1 주문건수", value=배민_원_주문건수)
+#     st.metric(label="배민 배민1 매출", value=배민_원_매출)
+#     st.metric(label="배민 배민1 30000원 이상 주문건수", value=배민_원_삼만원_건수)
+#     st.metric(label="배민 배민1 35000원 이상 주문건수", value=배민_원_삼만오천원_건수)
     
-with c4:
-    st.metric(label="배민 오픈리스트/울트라콜 주문건수", value=배민_오픈울트라_주문건수)
-    st.metric(label="배민 오픈리스트/울트라콜 매출", value=배민_오픈울트라_매출)
-with c5:
-    st.metric(label="배민 기타 주문건수", value=배민_기타_주문건수)
-    st.metric(label="배민 기타 매출", value=배민_기타_매출)
-with c6:
-    st.metric(label="배민 알뜰배달 주문건수", value=배민_알뜰배달_주문건수)
-    st.metric(label="배민 알뜰배달 매출", value=배민_알뜰배달_매출)
-    pass
-with c7:
-    st.metric(label="배민 포장 주문건수", value=배민_포장_건수)
+# with c4:
+#     st.metric(label="배민 오픈리스트/울트라콜 주문건수", value=배민_오픈울트라_주문건수)
+#     st.metric(label="배민 오픈리스트/울트라콜 매출", value=배민_오픈울트라_매출)
+# with c5:
+#     st.metric(label="배민 기타 주문건수", value=배민_기타_주문건수)
+#     st.metric(label="배민 기타 매출", value=배민_기타_매출)
+# with c6:
+#     st.metric(label="배민 알뜰배달 주문건수", value=배민_알뜰배달_주문건수)
+#     st.metric(label="배민 알뜰배달 매출", value=배민_알뜰배달_매출)
+#     pass
+# with c7:
+#     st.metric(label="배민 포장 주문건수", value=배민_포장_건수)
    
-#########################################################################################################################################################################
-#######################################################################################################################################################################
+# #########################################################################################################################################################################
+# #######################################################################################################################################################################
 
-히스토그램_옵션 = st.selectbox("구간금액 선택", ("1000원", "500원", "100원"))
-if 히스토그램_옵션 == '1000원':
-    히스토그램_옵션 = 38
-if 히스토그램_옵션 == '500원':
-    히스토그램_옵션 = 80
-if 히스토그램_옵션 == '100원':
-    히스토그램_옵션 = 400
+# 히스토그램_옵션 = st.selectbox("구간금액 선택", ("1000원", "500원", "100원"))
+# if 히스토그램_옵션 == '1000원':
+#     히스토그램_옵션 = 38
+# if 히스토그램_옵션 == '500원':
+#     히스토그램_옵션 = 80
+# if 히스토그램_옵션 == '100원':
+#     히스토그램_옵션 = 400
     
-기간_매출_히스토그램_리스트 = []
-for i in df_days['주문금액'].to_list():
-    if 10000 <= i <= 30000:
-        기간_매출_히스토그램_리스트.append(i)
+# 기간_매출_히스토그램_리스트 = []
+# for i in df_days['주문금액'].to_list():
+#     if 10000 <= i <= 30000:
+#         기간_매출_히스토그램_리스트.append(i)
         
-기간_매출_히스토그램 = px.histogram(기간_매출_히스토그램_리스트, nbins=히스토그램_옵션, 
-                           title='10000원 이상 30000원 이하 주문건수 히스토그램',
-                           text_auto=True,
-                           labels={'value': '주문금액(원)', 'count': '주문건수(건)'})
-기간_매출_히스토그램.update_layout(bargap=0.1, 
-                          showlegend=False, 
-                          xaxis_tickformat = ',d')
+# 기간_매출_히스토그램 = px.histogram(기간_매출_히스토그램_리스트, nbins=히스토그램_옵션, 
+#                            title='10000원 이상 30000원 이하 주문건수 히스토그램',
+#                            text_auto=True,
+#                            labels={'value': '주문금액(원)', 'count': '주문건수(건)'})
+# 기간_매출_히스토그램.update_layout(bargap=0.1, 
+#                           showlegend=False, 
+#                           xaxis_tickformat = ',d')
 
-st.plotly_chart(기간_매출_히스토그램, use_container_width=True)
+# st.plotly_chart(기간_매출_히스토그램, use_container_width=True)
 
-만오천미만_주문건수, 만오천이상_주문건수 = 0, 0
-for i in df_days['주문금액'].to_list():
-    if i < 15900:
-        만오천미만_주문건수 += 1
-    else:
-        만오천이상_주문건수 +=1
+# 만오천미만_주문건수, 만오천이상_주문건수 = 0, 0
+# for i in df_days['주문금액'].to_list():
+#     if i < 15900:
+#         만오천미만_주문건수 += 1
+#     else:
+#         만오천이상_주문건수 +=1
         
-st.metric(label="15900원 미만 주문건수", value=만오천미만_주문건수)
-st.metric(label="15900원 이상 주문건수", value=만오천이상_주문건수)
+# st.metric(label="15900원 미만 주문건수", value=만오천미만_주문건수)
+# st.metric(label="15900원 이상 주문건수", value=만오천이상_주문건수)
 
-#########################################################################################################################################################################
-#########################################################################################################################################################################
+# #########################################################################################################################################################################
+# #########################################################################################################################################################################
 
-# st.subheader('원본 주문 데이터')
-# st.dataframe(df_days)
+# # st.subheader('원본 주문 데이터')
+# # st.dataframe(df_days)
 
-# @st.cache_data
-# def convert_df(df_days):
-#     return df_days.to_csv().encode('utf-8') # IMPORTANT: Cache the conversion to prevent computation on every rerun
-# csv = convert_df(df_days)
+# # @st.cache_data
+# # def convert_df(df_days):
+# #     return df_days.to_csv().encode('utf-8') # IMPORTANT: Cache the conversion to prevent computation on every rerun
+# # csv = convert_df(df_days)
 
-# st.download_button(
-#     label="csv파일 다운로드",
-#     data=csv,
-#     file_name=f'MFD_order_data_{str(df.iloc[0,2]).split()[0]}.csv',
-#     mime='text/csv')
+# # st.download_button(
+# #     label="csv파일 다운로드",
+# #     data=csv,
+# #     file_name=f'MFD_order_data_{str(df.iloc[0,2]).split()[0]}.csv',
+# #     mime='text/csv')
