@@ -184,7 +184,7 @@ temp_df4 = temp_df4[temp_df4['주문날짜']<=yogiyo_max_date].groupby('주문�
 ######################################################################################################################################################################
 
 st.set_page_config(page_title='MFD Dash Board', 
-                    page_icon=mfd_logo, 
+                    # page_icon=mfd_logo, 
                     layout="wide", 
                     initial_sidebar_state="auto", 
                     menu_items=None)
