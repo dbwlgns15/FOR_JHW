@@ -14,7 +14,7 @@ bm_pw = str(id_pw.readline()).strip()
 cp_id = str(id_pw.readline()).strip()
 cp_pw = str(id_pw.readline()).strip()
 
-s = Service('./TEMP/chromedriver"') # Service 객체 생성
+s = Service('./TEMP/chromedriver') # Service 객체 생성
 driver = webdriver.Chrome(service=s) # 웹 드라이버 생성 및 Service 객체 전달
 ################# 배단의민족 ################################################
 ############################################################################
@@ -25,11 +25,11 @@ check_date = df_temp.loc[0]['주문날짜']
 
 baemin_url = 'https://ceo.baemin.com/self-service/orders/history'
 driver.get(baemin_url)  # 배달의민족 사장님 사이트 접속
-time.sleep(1)
+time.sleep(2)
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/div[1]/span/input').send_keys(bm_id)  # ID입력
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/div[2]/span/input').send_keys(bm_pw)  # PW입력
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/button').click()  # 로그인 버튼 클릭
-time.sleep(4)
+time.sleep(15)
 
 menu_list = ['고소한 삼겹', '고단백 삼겹', '황금비율 삼겹', '세트 (250g)', '고기만 (250g)', '고기만 (500g)', '100g', '200g',
               '쌈장', '와사비', '말돈소금', '명이나물', '쌈무', '김치', '된장찌개', '편마늘', '고추', '공기밥', '계란찜',
@@ -126,22 +126,22 @@ time.sleep(3)
 driver.find_element("xpath", '//*[@id="loginId"]').send_keys(cp_id) # ID입력
 driver.find_element("xpath", '//*[@id="password"]').send_keys(cp_pw) # PW입력
 driver.find_element("xpath", '//*[@id="merchant-login"]/div/div[2]/div/div/div/form/button').click() # 로그인 버튼 클릭
-time.sleep(6)
+time.sleep(20)
 
-try: # 광고가 뜨면 하고 아니면 패스
-    driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[4]/div/div/div/button').click() # x
-    time.sleep(0.5)
-    driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/button').click() # x
-    time.sleep(0.5)
-    driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[2]/div/div/div/button').click() # x
-    time.sleep(0.5)
-    driver.find_element("xpath", '//*[@id="merchant-management"]/div/div/header/a/img').click() # 메뉴
-    time.sleep(0.5)
-    driver.find_element("xpath", '//*[@id="merchant-management"]/div/nav/div[2]/ul/li[3]/a').click() # 매출관리
-    time.sleep(0.5)
-except:
-    driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[2]/div/div/div/button').click() # 신고 광고 x
-    time.sleep(0.5)
+# try: # 광고가 뜨면 하고 아니면 패스
+#     driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[4]/div/div/div/button').click() # x
+#     time.sleep(0.5)
+#     driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[3]/div/div/div/button').click() # x
+#     time.sleep(0.5)
+#     driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[2]/div/div/div/button').click() # x
+#     time.sleep(0.5)
+#     driver.find_element("xpath", '//*[@id="merchant-management"]/div/div/header/a/img').click() # 메뉴
+#     time.sleep(0.5)
+#     driver.find_element("xpath", '//*[@id="merchant-management"]/div/nav/div[2]/ul/li[3]/a').click() # 매출관리
+#     time.sleep(0.5)
+# except:
+#     driver.find_element("xpath", '//*[@id="merchant-onboarding-body"]/div[2]/div/div/div/button').click() # 신고 광고 x
+#     time.sleep(0.5)
     
 driver.find_element("xpath", '//*[@id="merchant-management"]/div/div/div[2]/div[1]/div/div/div/div[1]/div[2]/div[2]/div/div[1]').click() # 기간선택 버튼 클릭
 time.sleep(0.2)
