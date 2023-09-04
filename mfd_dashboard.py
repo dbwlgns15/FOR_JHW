@@ -183,13 +183,13 @@ from PIL import Image
 #########################################################################################################################################################################
 #######################################################################################################################################################################
 
-st.set_page_config(page_title='MFD Dash Board', 
-                    page_icon=mfd_logo, 
-                    layout="wide", 
-                    initial_sidebar_state="auto", 
-                    menu_items=None)
+# st.set_page_config(page_title='MFD Dash Board', 
+#                     page_icon=mfd_logo, 
+#                     layout="wide", 
+#                     initial_sidebar_state="auto", 
+#                     menu_items=None)
 
-st.write(str(df.iloc[0,3]).split()[0]+' 기준 (현장결제건 제외)')
+# st.write(str(df.iloc[0,3]).split()[0]+' 기준 (현장결제건 제외)')
 
 # _,c1,_, c2,_, c3,_, c4,_ = st.columns([2,10,2,10,2,10,2,10,2])
 # with c1:
