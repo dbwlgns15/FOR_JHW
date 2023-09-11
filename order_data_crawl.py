@@ -25,7 +25,7 @@ check_date = df_temp.loc[0]['주문날짜']
 
 baemin_url = 'https://ceo.baemin.com/self-service/orders/history'
 driver.get(baemin_url)  # 배달의민족 사장님 사이트 접속
-time.sleep(2)
+time.sleep(4)
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/div[1]/span/input').send_keys(bm_id)  # ID입력
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/div[2]/span/input').send_keys(bm_pw)  # PW입력
 driver.find_element("xpath", '//*[@id="root"]/div[1]/div/div/form/button').click()  # 로그인 버튼 클릭
