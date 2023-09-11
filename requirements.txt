@@ -1,4 +1,4 @@
-pandas==3.9
+pandas
 numpy
 streamlit
 plotly
